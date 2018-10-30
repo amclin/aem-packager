@@ -1,0 +1,27 @@
+{
+  "name": "aem-packager",
+  "version": "0.0.1",
+  "description": "A node plugin that creates packages installable through the AEM package manager.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amclin/aem-packager.git"
+  },
+  "keywords": [
+    "AEM",
+    "packages",
+    "clientlibs",
+    "Adobe",
+    "Experience",
+    "Manager"
+  ],
+  "author": "Anthony McLin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amclin/aem-packager/issues"
+  },
+  "homepage": "https://github.com/amclin/aem-packager#readme"
+}
