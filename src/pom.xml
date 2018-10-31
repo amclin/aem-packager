@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>${npmName}</name>
+	<description>${npmdescription}</description>
+	<groupId>${npmgroupId}</groupId>
+	<artifactId>${npmartifactId}</artifactId>
+	<version>${npmversion}</version>
+	<packaging>content-package</packaging>
+
+	<properties>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ss'Z'</maven.build.timestamp.format>
+		<project.jcrPath>${npmjcrPath}</project.jcrPath>
+		<project.src>${npmbuildOutput}</project.src>
+	</properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>adobe-public-releases</id>
+			<name>Adobe Basel Public Repository</name>
+			<url>http://repo.adobe.com/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>com.day.jcr.vault</groupId>
+				<artifactId>maven-vault-plugin</artifactId>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-content-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/vault-work/jcr_root/${project.jcrPath}/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.src}</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.day.jcr.vault</groupId>
+				<artifactId>content-package-maven-plugin</artifactId>
+				<version>0.0.18</version>
+				<extensions>true</extensions>
+				<configuration>
+					<name>${project.name}</name>
+					<group>${project.groupId}</group>
+					<failOnError>true</failOnError>
+					<filters>
+						<filter>
+							<mode>replace</mode>
+							<root>/${project.jcrPath}/</root>
+						</filter>
+					</filters>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>npm</id>
+			<build>
+				<directory>${npmbuildTarget}</directory>
+			</build>
+		</profile>
+	</profiles>
+</project>
