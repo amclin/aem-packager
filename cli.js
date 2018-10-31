@@ -41,7 +41,7 @@ const defaults = {
     defines: {
       name: 'My Project',
       description: 'My Project Description',
-      groupId: 'myGroupId',
+      groupId: 'npm',
       artifactId: 'myArtifactId',
       version: '0.0.1',
       buildOutput: paths.npmOut,
@@ -63,11 +63,14 @@ const pkgDefines = {
   name: pkg.name,
   version: pkg.version
 }
+// Get override values from the NPM package.json
+const pkgConfigDefines = pkg.aemConfig || {}
 
 var defines = Object.assign(
   {},
   defaultDefines,
-  pkgDefines
+  pkgDefines,
+  pkgConfigDefines
 )
 
 // Prepare the variables for the pom.xml
