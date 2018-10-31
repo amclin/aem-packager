@@ -50,3 +50,5 @@ Force the version number that will be used for the AEM content package. When not
 ```
 "version": "1.0.0"
 ```
+
+[![NPM](https://nodei.co/npm/aem-packager.png)](https://nodei.co/npm/aem-packager/)
