@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "A node plugin that creates packages installable through the AEM package manager.",
   "main": "index.js",
-  "scripts": {
-    "test": "test"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amclin/aem-packager.git"
@@ -23,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/amclin/aem-packager/issues"
   },
-  "homepage": "https://github.com/amclin/aem-packager#readme"
+  "homepage": "https://github.com/amclin/aem-packager#readme",
+  "scripts": {
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
 }
