@@ -1,0 +1,13 @@
+{
+  "options": {
+    "srcDir": "dist",
+    "buildDir": "target"
+  },
+  "defines": {
+    "name": "My Project",
+    "description": "My Project Description",
+    "groupId": "npm",
+    "artifactId": "myArtifactId",
+    "version": "0.0.1"
+  }
+}

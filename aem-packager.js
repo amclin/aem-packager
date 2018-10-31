@@ -1,22 +1,12 @@
 #!/usr/bin/env node
 
+console.log(`Starting AEM Packager.`)
+
 const path = require('path')
 const _ = require('lodash')
 
 // Define defaults when configs are not provided
-const defaults = {
-  options: {
-    srcDir: 'dist',
-    buildDir: 'target'
-  },
-  defines: {
-    name: 'My Project',
-    description: 'My Project Description',
-    groupId: 'npm',
-    artifactId: 'myArtifactId',
-    version: '0.0.1'
-  }
-}
+const defaults = require('./src/defaults.json')
 
 /**
  * Renames properties on an object by appending a prefix to them
@@ -54,15 +44,13 @@ const getPaths = function (options) {
  */
 const getOptions = function (pkg) {
   var options = {}
-  // Default fallback options defined in this module
-  const defaultOptions = defaults.options
   // Override values from the NPM package.json
   const pkgConfigOptions = _.get(pkg, 'aem-packager.options', {})
 
   _.defaults(
     options,
     pkgConfigOptions,
-    defaultOptions
+    defaults.options // Default fallback options defined in this module
   )
 
   return options
@@ -90,8 +78,7 @@ const getCommands = function (paths) {
  */
 const getDefines = function (pkg, paths) {
   var defines = {}
-  // Default fallback defined in this module
-  const defaultDefines = defaults.defines
+
   // Standard properites extracted from NPM package.json values
   const pkgDefines = {
     artifactId: pkg.name,
@@ -112,7 +99,7 @@ const getDefines = function (pkg, paths) {
     pathOptions,
     pkgConfigDefines,
     pkgDefines,
-    defaultDefines
+    defaults.defines // Default fallback defined in this module
   )
 
   // Set a safe JCR install path if one was not determined
@@ -137,9 +124,10 @@ const getDefaultJCRPath = function (defines) {
   return segs.join('/')
 }
 
-const [,, ...args] = process.argv // Get command line arguments
+// Get command line arguments
+// const [,, ...args] = process.argv
 
-const mvn = require('maven').create(defaults.maven.options)
+const mvn = require('maven').create({})
 const pkg = require(path.resolve(process.cwd(), 'package.json'))
 
 const options = getOptions(pkg)
@@ -149,8 +137,7 @@ var defines = getDefines(pkg, paths)
 // Prepare the variables for the pom.xml
 defines = prefixProperties(defines, 'npm')
 
-console.log(`Running AEM Packager with arguments ${args}`)
-console.log(`Running AEM Packager with defaults ${defaults}`)
+console.log(`Running AEM Packager for ${defines.npmgroupId}.${defines.npmartifactId}`)
 
 // Run maven to build a package
 mvn.execute(commands, defines).then(result => {
