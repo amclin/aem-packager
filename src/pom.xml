@@ -6,16 +6,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<name>${npmName}</name>
-	<description>${npmDescription}</description>
-	<groupId>${npmGroupId}</groupId>
-	<artifactId>${npmArtifactId}</artifactId>
-	<version>${npmVersion}</version>
+	<description>${npmdescription}</description>
+	<groupId>${npmgroupId}</groupId>
+	<artifactId>${npmartifactId}</artifactId>
+	<version>${npmversion}</version>
 	<packaging>content-package</packaging>
 
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ss'Z'</maven.build.timestamp.format>
-		<project.jcrPath>${npmJcrPath}</project.jcrPath>
-		<project.src>${npmBuildOutput}</project.src>
+		<project.jcrPath>${npmjcrPath}</project.jcrPath>
+		<project.src>${npmbuildOutput}</project.src>
 	</properties>
 
 	<pluginRepositories>
@@ -86,7 +86,7 @@
 		<profile>
 			<id>npm</id>
 			<build>
-				<directory>${npmBuildTarget}</directory>
+				<directory>${npmbuildTarget}</directory>
 			</build>
 		</profile>
 	</profiles>
