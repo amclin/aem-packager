@@ -1,6 +1,6 @@
 {
   "name": "aem-packager",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A node plugin that creates packages installable through the AEM package manager.",
   "main": "aem-packager.js",
   "repository": {
