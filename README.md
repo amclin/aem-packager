@@ -10,10 +10,19 @@ The settings for running the packager are populated through the `options` object
 "scripts": {...},
 "dependencies": {...},
 "aem-packager": {
-    "options": {...},
+    "options": {
+        "srcDir": "dist",
+        "buildDir": "target"
+    },
     "defines": {...}
 }
 ```
+
+### srcDir (string)
+The directory where your compiled files are located waiting to be packaged. Defaults to `dist` when not provided. All files within the folder will be included in the AEM package, so make sure that the output has been sanitized to only the files you wish to deploy.
+
+### buildDir (string)
+The working directory that Maven will use for compiling the build package. Defaults to `target` when not provided.
 
 ## Defines
 The primary required values for generating a Maven package will be automatically be extracted from your project's `package.json`, but they can also be overridden by adding an `aem-packager.defines` section to your `package.json`.

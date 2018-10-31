@@ -1,6 +1,28 @@
 #!/usr/bin/env node
 
-/*
+const path = require('path')
+const _ = require('lodash')
+
+// Define defaults when configs are not provided
+const defaults = {
+  options: {
+    srcDir: 'dist',
+    buildDir: 'target'
+  },
+  maven: {
+    defines: {
+      name: 'My Project',
+      description: 'My Project Description',
+      groupId: 'npm',
+      artifactId: 'myArtifactId',
+      version: '0.0.1',
+      jcrPath: 'etc/designs/myGroupId/myArtifactId'
+    },
+    options: {}
+  }
+}
+
+/**
  * Renames properties on an object by appending a prefix to them
  * @param {Object} - Object to modify
  * @param {String} - prefix to append to the name of all the properties in the object
@@ -16,73 +38,107 @@ const prefixProperties = function (obj, prefix) {
   return obj
 }
 
-const path = require('path')
-
-const [,, ...args] = process.argv // Get command line arguments
-const pkg = require(path.resolve(process.cwd(), 'package.json')) // Extract the NPM project details
-
-// Define paths used in various steps of the process
-const paths = {
-  pom: path.resolve(__dirname, 'src/pom.xml'),
-  mvnTarget: path.resolve(process.cwd(), 'target'),
-  npmOut: path.resolve(process.cwd(), 'dist')
-}
-
-// Define defaults when configs are not provided
-const defaults = {
-  maven: {
-    commands: [
-      '-f',
-      paths.pom,
-      'clean',
-      'install',
-      '-Pnpm' // Force a build profile that lets us set the Maven build target folder
-    ],
-    defines: {
-      name: 'My Project',
-      description: 'My Project Description',
-      groupId: 'npm',
-      artifactId: 'myArtifactId',
-      version: '0.0.1',
-      buildOutput: paths.npmOut,
-      buildTarget: paths.mvnTarget,
-      jcrPath: 'etc/designs/myGroupId/myArtifactId'
-    },
-    options: {}
+/**
+ * Parses the settings to generate a paths object containing
+ * the various paths used in AEM and the build process
+ * @param {Object} - plugin options object
+ * @returns {Object} - paths
+ */
+const getPaths = function (options) {
+  return {
+    pom: path.resolve(__dirname, 'src/pom.xml'),
+    mvnTarget: path.resolve(process.cwd(), options.buildDir),
+    npmOut: path.resolve(process.cwd(), options.srcDir)
   }
 }
-const config = Object.assign({}, defaults)
-const mvn = require('maven').create(config.maven.options)
 
-// Default fallback defined in this module
-const defaultDefines = defaults.maven.defines
-// Get values mapped from standard NPM package.json values
-const pkgDefines = {
-  artifactId: pkg.name,
-  description: pkg.description,
-  name: pkg.name,
-  version: pkg.version
+/**
+ * Gets a consolidated options object from the various sources
+ * @param {Object} pkg - NPM package JSON
+ */
+const getOptions = function (pkg) {
+  var options = {}
+  // Default fallback options defined in this module
+  const defaultOptions = defaults.options
+  // Override values from the NPM package.json
+  const pkgConfigOptions = _.get(pkg, 'aem-packager.options', {});
+
+  _.defaults(
+    options,
+    pkgConfigOptions,
+    defaultOptions
+  )
+
+  return options
 }
-// Get override values from the NPM package.json
-const pkgConfigDefines = pkg['aem-packager'].defines || {}
 
-var defines = Object.assign(
-  {},
-  defaultDefines,
-  pkgDefines,
-  pkgConfigDefines
-)
+/**
+ * Prepares the list of Maven commands
+ * @param {Ojbect} paths - Modules paths list
+ * @param {Array} commands to run in Maven
+ */
+const getCommands = function (paths) {
+  return [
+    '-f',
+    paths.pom,
+    'clean',
+    'install',
+    '-Pnpm' // Force a build profile that lets us set the Maven build target folder
+  ]
+}
 
+/**
+ * Gets a consolidated list of Maven defines from the various sources
+ * @param {Object} pkg - NPM package JSON
+ # @param {Object} paths - List of module paths
+ */
+const getDefines = function (pkg, paths) {
+  var defines = {}
+  // Default fallback defined in this module
+  const defaultDefines = defaults.maven.defines
+  // Standard properites extracted from NPM package.json values
+  const pkgDefines = {
+    artifactId: pkg.name,
+    description: pkg.description,
+    name: pkg.name,
+    version: pkg.version
+  }
+  // Override values from the NPM package.json
+  const pkgConfigDefines = _.get(pkg, 'aem-packager.defines', {});
+  // Apply configurations from paths
+  const pathOptions = {
+    dist: paths.npmOut,
+    buildTarget: paths.mvnTarget
+  }
+
+  _.defaults(
+    defines,
+    pathOptions,
+    pkgConfigDefines,
+    pkgDefines,
+    defaultDefines
+  )
+
+  return defines
+}
+
+const [,, ...args] = process.argv // Get command line arguments
+
+const mvn = require('maven').create(defaults.maven.options)
+const pkg = require(path.resolve(process.cwd(), 'package.json'))
+
+const options = getOptions(pkg)
+const paths = getPaths(options)
+const commands = getCommands(paths)
+var defines = getDefines(pkg, paths)
 // Prepare the variables for the pom.xml
 defines = prefixProperties(defines, 'npm')
+
 console.log(`Running AEM Packager with arguments ${args}`)
 console.log(`Running AEM Packager with defaults ${defaults}`)
 
 // Run maven to build a package
-mvn.execute(
-  config.maven.commands,
-  defines
-).then(result => {
+mvn.execute(commands, defines).then(result => {
   console.log(`AEM package has been created and can be found in ${paths.mvnTarget}`)
 }).catch(result => {
   console.error('Failed to compile Maven package. See Maven log for details.')
