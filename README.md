@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/amclin/aem-packager.svg?branch=master)](https://travis-ci.org/amclin/aem-packager)
+[![npm version](https://badge.fury.io/js/aem-packager.svg)](https://badge.fury.io/js/aem-packager)
+[![Dependencies Status](https://david-dm.org/amclin/aem-packager/status.svg)](https://david-dm.org/amclin/aem-packager)
+[![devDependencies Status](https://david-dm.org/amclin/aem-packager/dev-status.svg)](https://david-dm.org/amclin/aem-packager?type=dev)
 # aem-packager
 A node plugin that creates AEM packages installable through the Adobe Experience Manager package manager.
 
@@ -79,3 +82,5 @@ Force the version number that will be used for the AEM content package. When not
 ```
 "version": "1.0.0"
 ```
+
+[![NPM](https://nodei.co/npm/aem-packager.png)](https://nodei.co/npm/aem-packager/)
