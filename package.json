@@ -21,6 +21,9 @@
     "url": "https://github.com/amclin/aem-packager/issues"
   },
   "homepage": "https://github.com/amclin/aem-packager#readme",
+  "bin": {
+    "aem-packager": "./cli.js"
+  },
   "scripts": {
     "test": "standard"
   },
