@@ -15,8 +15,7 @@ const defaults = {
       description: 'My Project Description',
       groupId: 'npm',
       artifactId: 'myArtifactId',
-      version: '0.0.1',
-      jcrPath: 'etc/designs/myGroupId/myArtifactId'
+      version: '0.0.1'
     },
     options: {}
   }
@@ -119,7 +118,26 @@ const getDefines = function (pkg, paths) {
     defaultDefines
   )
 
+  // Set a safe JCR install path if one was not determined
+  defines.jcrPath = _.get(defines, 'jcrPath', getDefaultJCRPath(defines))
+
   return defines
+}
+
+/**
+ * Generates the default JCR path
+ * @param {Object} defines - The consolidates list of Maven variables
+ * @returns {String} the JCR path where the package contents should be installed in AEM
+ */
+const getDefaultJCRPath = function ( defines ) {
+  var segs = [
+    '', // force leading slash
+    'apps',
+    defines.groupId,
+    defines.artifactId,
+    'clientlibs'
+  ]
+  return segs.join('/')
 }
 
 const [,, ...args] = process.argv // Get command line arguments

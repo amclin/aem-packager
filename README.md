@@ -13,6 +13,7 @@ The settings for running the packager are populated through the `options` object
     "options": {
         "srcDir": "dist",
         "buildDir": "target"
+        "jcrPath": "/apps/mygroup/myapp/clientlibs"
     },
     "defines": {...}
 }
@@ -23,6 +24,9 @@ The directory where your compiled files are located waiting to be packaged. Defa
 
 ### buildDir (string)
 The working directory that Maven will use for compiling the build package. Defaults to `target` when not provided.
+
+### jcrPath (string)
+The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId) and [`artifactId`](#artifactId) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
 
 ## Defines
 The primary required values for generating a Maven package will be automatically be extracted from your project's `package.json`, but they can also be overridden by adding an `aem-packager.defines` section to your `package.json`.
