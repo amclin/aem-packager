@@ -29,5 +29,8 @@
   },
   "devDependencies": {
     "standard": "^12.0.1"
+  },
+  "dependencies": {
+    "maven": "^4.4.1"
   }
 }
