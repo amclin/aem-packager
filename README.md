@@ -3,9 +3,69 @@
 [![Dependencies Status](https://david-dm.org/amclin/aem-packager/status.svg)](https://david-dm.org/amclin/aem-packager)
 [![devDependencies Status](https://david-dm.org/amclin/aem-packager/dev-status.svg)](https://david-dm.org/amclin/aem-packager?type=dev)
 # aem-packager
-A node plugin that creates AEM packages installable through the Adobe Experience Manager package manager.
+Creates AEM packages installable through the Adobe Experience Manager package manager.
 
-## Options
+1. [Using](#Using)
+2. [Dependencies](#Dependencies)
+3. [Packager Options](#Options)
+4. [Package Defines](#Defines)
+
+## Using
+Install **aem-packager** as a dependency for your NodeJS project:
+
+`npm install --save aem-packager`
+
+Add the Maven working directory to your .gitignore so you don't have unecessary files in your source control:
+
+`/target`
+
+Make sure that your `package.json` has the `name`, `description`, and `version` all filled in:
+
+```
+{
+  "name": "my-npm-project",
+  "description": "My project does something interesting.",
+  "version": "1.0.0",
+  "dependencies": ...
+}
+```
+
+If your project doesn't currently put its build ouptut in the `/dist` folder, then set the [source directory](#buildDir-string).
+
+Add a package script to your `package.json`:
+
+```
+...
+  "scripts": {
+    ....
+    "package": "aem-packager",
+  }
+
+```
+
+Run your build process as normal. After your build completes, then run the packager:
+
+`npm run package`
+
+The resulting `.zip` file will be outpt to the `target` folder by default. You should be able to take that file and upload it and install it through [AEM's package manager](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/package-manager.html).
+
+![Package installed in AEM Package Manager](docs/installed-package.png)
+
+### Package Name
+AEM requires SEMVER versioning in order for packages to be recognized as version updates. AEM also cannot safely install an older version of a package over a new version, which is why the filename contains a timestamp to guarantee sequential uniqueness.
+
+The output package name uses the pattern:
+
+`{[groupId](#groupId-string)}-{[artifactId](#artifactId-string)}-{[version](#version-string)}-{timestamp}.zip`
+
+Example:
+
+`npm-package-test-1.1.0-2018-10-31T18-22-42Z.zip`
+
+## Dependencies
+**aem-packager** is a wrapper around [Adobe's Maven plugin](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/vlt-mavenplugin.html) for building content packages. Therefore, you will need [Maven installed on your system](https://maven.apache.org/install.html).
+
+## Packager Options
 The settings for running the packager are populated through the `options` object. This can be added to your project's `package.json` as a `aem-packager.options` section.
 
 ```
@@ -32,7 +92,7 @@ The working directory that Maven will use for compiling the build package. Defau
 The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId-string) and [`artifactId`](#artifactId-string) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
 
 ## Defines
-The primary required values for generating a Maven package will be automatically be extracted from your project's `package.json`, but they can also be overridden by adding an `aem-packager.defines` section to your `package.json`.
+In addition to [configuring how the packager runs](#Options), you can also set Maven **defines** which provide specific values in the resulting installable AEM package. The primary required values for generating an AEM package will be automatically be extracted from your project's `package.json`, but they can be overridden by adding a `defines` object to your project's `package.json` as a `aem-packager.defines` section.
 
 ```
 "name": "my-npm-project",
