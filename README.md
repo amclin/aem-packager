@@ -3,17 +3,33 @@
 A node plugin that creates AEM packages installable through the Adobe Experience Manager package manager.
 
 ## Options
-The primary required values will be automatically be extracted from your project's `package.json`, but they can also be overridden by adding an `aemConfig` section to your `package.json`.
+The settings for running the packager are populated through the `options` object. This can be added to your project's `package.json` as a `aem-packager.options` section.
 
 ```
 "name": "my-npm-project",
 "scripts": {...},
 "dependencies": {...},
-"aemConfig": {
-    "artifactId": "my-project",
-    "description": "My AEM package for cool features.",
-    "groupId": "org.example.myprojectgroup",
-    "version": "1.2.3"
+"aem-packager": {
+    "options": {...},
+    "defines": {...}
+}
+```
+
+## Defines
+The primary required values for generating a Maven package will be automatically be extracted from your project's `package.json`, but they can also be overridden by adding an `aem-packager.defines` section to your `package.json`.
+
+```
+"name": "my-npm-project",
+"scripts": {...},
+"dependencies": {...},
+"aem-packager": {
+    "options": {...},
+    "defines": {
+        "artifactId": "my-project",
+        "description": "My AEM package for cool features.",
+        "groupId": "org.example.myprojectgroup",
+        "version": "1.2.3"
+    }
 }
 ```
 

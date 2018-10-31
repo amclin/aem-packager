@@ -64,7 +64,7 @@ const pkgDefines = {
   version: pkg.version
 }
 // Get override values from the NPM package.json
-const pkgConfigDefines = pkg.aemConfig || {}
+const pkgConfigDefines = pkg['aem-packager'].defines || {}
 
 var defines = Object.assign(
   {},
@@ -78,6 +78,7 @@ defines = prefixProperties(defines, 'npm')
 console.log(`Running AEM Packager with arguments ${args}`)
 console.log(`Running AEM Packager with defaults ${defaults}`)
 
+// Run maven to build a package
 mvn.execute(
   config.maven.commands,
   defines
