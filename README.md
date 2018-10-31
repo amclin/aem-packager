@@ -15,9 +15,9 @@ Install **aem-packager** as a dependency for your NodeJS project:
 
 `npm install --save aem-packager`
 
-Add the Maven working directory to your .gitignore so you don't have unecessary files in your source control:
+Add the Maven working directory to your `.gitignore` so you don't have unecessary files in your source control:
 
-`/target`
+`./target`
 
 Make sure that your `package.json` has the `name`, `description`, and `version` all filled in:
 
@@ -56,9 +56,9 @@ AEM requires SEMVER versioning in order for packages to be recognized as version
 
 The output package name uses the pattern:
 
-`{[groupId](#groupId-string)}-{[artifactId](#artifactId-string)}-{[version](#version-string)}-{timestamp}.zip`
+`{groupId}-{artifactId}-{version}-{timestamp}.zip`
 
-Example:
+#### Example:
 
 `npm-package-test-1.1.0-2018-10-31T18-22-42Z.zip`
 
