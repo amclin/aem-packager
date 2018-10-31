@@ -15,7 +15,7 @@ const defaults = {
     groupId: 'npm',
     artifactId: 'myArtifactId',
     version: '0.0.1'
-  },
+  }
 }
 
 /**
@@ -57,7 +57,7 @@ const getOptions = function (pkg) {
   // Default fallback options defined in this module
   const defaultOptions = defaults.options
   // Override values from the NPM package.json
-  const pkgConfigOptions = _.get(pkg, 'aem-packager.options', {});
+  const pkgConfigOptions = _.get(pkg, 'aem-packager.options', {})
 
   _.defaults(
     options,
@@ -100,7 +100,7 @@ const getDefines = function (pkg, paths) {
     version: pkg.version
   }
   // Override values from the NPM package.json
-  const pkgConfigDefines = _.get(pkg, 'aem-packager.defines', {});
+  const pkgConfigDefines = _.get(pkg, 'aem-packager.defines', {})
   // Apply configurations from paths
   const pathOptions = {
     dist: paths.npmOut,
@@ -126,7 +126,7 @@ const getDefines = function (pkg, paths) {
  * @param {Object} defines - The consolidates list of Maven variables
  * @returns {String} the JCR path where the package contents should be installed in AEM
  */
-const getDefaultJCRPath = function ( defines ) {
+const getDefaultJCRPath = function (defines) {
   var segs = [
     '', // force leading slash
     'apps',
