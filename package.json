@@ -11,9 +11,8 @@
     "AEM",
     "packages",
     "clientlibs",
-    "Adobe",
-    "Experience",
-    "Manager"
+    "Adobe Experience Manager",
+    "cq5"
   ],
   "author": "Anthony McLin",
   "license": "MIT",
