@@ -26,7 +26,7 @@ The directory where your compiled files are located waiting to be packaged. Defa
 The working directory that Maven will use for compiling the build package. Defaults to `target` when not provided.
 
 ### jcrPath (string)
-The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId) and [`artifactId`](#artifactId) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
+The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId-string) and [`artifactId`](#artifactId-string) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
 
 ## Defines
 The primary required values for generating a Maven package will be automatically be extracted from your project's `package.json`, but they can also be overridden by adding an `aem-packager.defines` section to your `package.json`.
@@ -73,7 +73,7 @@ groupId is used within AEM's package management to group related packages togeth
 ```
 
 ### version (string)
-Force the version number that will be used for the AEM content package. When not defined, this will default to the version string provided by your project's `package.json`. Must be a ![SEMVER](https://semver.org/) value.
+Force the version number that will be used for the AEM content package. When not defined, this will default to the version string provided by your project's `package.json`. Must be a [SEMVER](https://semver.org/) value.
 
 #### Example:
 ```

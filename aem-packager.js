@@ -9,16 +9,13 @@ const defaults = {
     srcDir: 'dist',
     buildDir: 'target'
   },
-  maven: {
-    defines: {
-      name: 'My Project',
-      description: 'My Project Description',
-      groupId: 'npm',
-      artifactId: 'myArtifactId',
-      version: '0.0.1'
-    },
-    options: {}
-  }
+  defines: {
+    name: 'My Project',
+    description: 'My Project Description',
+    groupId: 'npm',
+    artifactId: 'myArtifactId',
+    version: '0.0.1'
+  },
 }
 
 /**
@@ -94,7 +91,7 @@ const getCommands = function (paths) {
 const getDefines = function (pkg, paths) {
   var defines = {}
   // Default fallback defined in this module
-  const defaultDefines = defaults.maven.defines
+  const defaultDefines = defaults.defines
   // Standard properites extracted from NPM package.json values
   const pkgDefines = {
     artifactId: pkg.name,
