@@ -15,7 +15,7 @@
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ss'Z'</maven.build.timestamp.format>
 		<project.jcrPath>${npmjcrPath}</project.jcrPath>
-		<project.src>${npmbuildOutput}</project.src>
+		<project.src>${npmdist}</project.src>
 	</properties>
 
 	<pluginRepositories>
@@ -74,7 +74,7 @@
 					<filters>
 						<filter>
 							<mode>replace</mode>
-							<root>/${project.jcrPath}/</root>
+							<root>${project.jcrPath}</root>
 						</filter>
 					</filters>
 				</configuration>

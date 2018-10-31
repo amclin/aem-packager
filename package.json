@@ -2,7 +2,7 @@
   "name": "aem-packager",
   "version": "0.1.0",
   "description": "A node plugin that creates packages installable through the AEM package manager.",
-  "main": "index.js",
+  "main": "aem-packager.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amclin/aem-packager.git"
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/amclin/aem-packager#readme",
   "bin": {
-    "aem-packager": "./cli.js"
+    "aem-packager": "./aem-packager.js"
   },
   "scripts": {
     "test": "standard"
@@ -31,6 +31,7 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "maven": "^4.4.1"
   }
 }
