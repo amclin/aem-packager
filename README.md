@@ -31,7 +31,7 @@ Make sure that your `package.json` has the `name`, `description`, and `version` 
   "name": "my-npm-project",
   "description": "My project does something interesting.",
   "version": "1.0.0",
-  "dependencies": ...
+  "dependencies": {...}
 }
 ```
 
@@ -39,13 +39,12 @@ If your project doesn't currently put its build ouptut in the `/dist` folder, th
 
 Add a package script to your `package.json`:
 
-```
-...
+```json
   "scripts": {
-    ....
+    "build": "my build script",
     "package": "aem-packager",
+    "test": "my test script"
   }
-
 ```
 
 Run your build process as normal. After your build completes, then run the packager:
@@ -73,7 +72,7 @@ The output package name uses the pattern:
 ## Packager Options
 The settings for running the packager are populated through the `options` object. This can be added to your project's `package.json` as a `aem-packager.options` section.
 
-```
+```json
 "name": "my-npm-project",
 "scripts": {...},
 "dependencies": {...},
@@ -99,7 +98,7 @@ The path in the JCR (AEM's storage system) where the module will be installed. S
 ## Defines
 In addition to [configuring how the packager runs](#Options), you can also set Maven **defines** which provide specific values in the resulting installable AEM package. The primary required values for generating an AEM package will be automatically be extracted from your project's `package.json`, but they can be overridden by adding a `defines` object to your project's `package.json` as a `aem-packager.defines` section.
 
-```
+```json
 "name": "my-npm-project",
 "scripts": {...},
 "dependencies": {...},
@@ -115,28 +114,27 @@ In addition to [configuring how the packager runs](#Options), you can also set M
 ```
 
 ### artifactId
-artifactId is used within AEM's package management to identify the package. Default value if unset will be the npm project name from your project's `package.json`. Must be a machine-safe string.
+Used within AEM's package management to identify the package. Default value if unset will be the npm project name from your project's `package.json`. Must be a machine-safe string. Restricting to lowercase and hypphens is recommended to prevent conflicts.
 
 #### Example of artifactId
-```
-// For a company called "Example.org":
+```json
 "artifactId": "my-project"
 ```
 
 ### description
-Force the description that will be used for the AEM content package. When not defined, this will default to the description string provided by your project's `package.json`.
+Human-readable description that will be used for the AEM content package. When not defined, this will default to the description string provided by your project's `package.json`.
 
 #### Example of description
-```
+```json
 "description": "My AEM package for cool features."
 ```
 
 ### groupId
-groupId is used within AEM's package management to group related packages together. The naming convention typically follows Java package naming so it is easy to find packages in the AEM package manager. Default value if unset will be `npm`. Must be a machine-safe string.
+Used within AEM's package management to group related packages together. The naming convention typically follows Java package naming so it is easy to find packages in the AEM package manager. Default value if unset will be `npm`. Must be a machine-safe string.
 
 #### Example of groupId
-```
-// For a company called "Example.org":
+For a company called "Example.org":
+```json
 "groupId": "org.example.myprojectgroup"
 ```
 
@@ -144,7 +142,7 @@ groupId is used within AEM's package management to group related packages togeth
 Force the version number that will be used for the AEM content package. When not defined, this will default to the version string provided by your project's `package.json`. Must be a [SEMVER](https://semver.org/) value.
 
 #### Example of version
-```
+```json
 "version": "1.0.0"
 ```
 ## More Info
