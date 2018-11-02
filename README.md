@@ -5,11 +5,11 @@
 # aem-packager
 Creates AEM packages for NodeJS projects that can then be installed through the Adobe Experience Manager package manager. Combined with the [aem-clientlib-generator](https://www.npmjs.com/package/aem-clientlib-generator) this provides a rich end-to-end workflow for developing JS and CSS for injection into AEM as components, libraries, applications, or contents.
 
-1. [Using](#using)
-    * [Example Project](https://github.com/amclin/aem-packager-example)
-2. [Dependencies](#dependencies)
-3. [Packager Options](#options)
-4. [Package Defines](#defines)
+1.  [Using](#using)
+    *   [Example Project](https://github.com/amclin/aem-packager-example)
+2.  [Dependencies](#dependencies)
+3.  [Packager Options](#options)
+4.  [Package Defines](#defines)
 
 ## Using
 Install **aem-packager** as a dependency for your NodeJS project:
@@ -144,7 +144,7 @@ Force the version number that will be used for the AEM content package. When not
 "version": "1.0.0"
 ```
 ## More Info
-* For an example end-to-end project, see https://github.com/amclin/aem-packager-example
-* [aem-clientlib-generator](https://www.npmjs.com/package/aem-clientlib-generator)
+*   Need more help in getting this working? See [aem-packager-example](https://github.com/amclin/aem-packager-example) for an example end-to-end NodeJS project that produces an installable AEM package.
+*   Need to create AEM's clientlib folder structures and manifests? See [aem-clientlib-generator](https://www.npmjs.com/package/aem-clientlib-generator)
 
 [![NPM](https://nodei.co/npm/aem-packager.png)](https://nodei.co/npm/aem-packager/)
