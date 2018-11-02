@@ -8,8 +8,11 @@ Creates AEM packages for NodeJS projects that can then be installed through the 
 
 1.  [Using](#using)
     *   [Example Project](https://github.com/amclin/aem-packager-example)
+
 2.  [Dependencies](#dependencies)
+
 3.  [Packager Options](#options)
+
 4.  [Package Defines](#defines)
 
 ## Using
@@ -23,7 +26,7 @@ Add the Maven working directory to your `.gitignore` so you don't have unecessar
 
 Make sure that your `package.json` has the `name`, `description`, and `version` all filled in:
 
-```
+```json
 {
   "name": "my-npm-project",
   "description": "My project does something interesting.",
@@ -32,7 +35,7 @@ Make sure that your `package.json` has the `name`, `description`, and `version` 
 }
 ```
 
-If your project doesn't currently put its build ouptut in the `/dist` folder, then set the [source directory](#buildDir-string).
+If your project doesn't currently put its build ouptut in the `/dist` folder, then set the [source directory](#buildDir).
 
 Add a package script to your `package.json`:
 
@@ -60,7 +63,7 @@ The output package name uses the pattern:
 
 `{groupId}-{artifactId}-{version}-{timestamp}.zip`
 
-#### Example:
+#### Example
 
 `npm-package-test-1.1.0-2018-10-31T18-22-42Z.zip`
 
@@ -91,7 +94,7 @@ The directory where your compiled files are located waiting to be packaged. Defa
 The working directory that Maven will use for compiling the build package. Defaults to `target` when not provided.
 
 ### jcrPath (string)
-The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId-string) and [`artifactId`](#artifactId-string) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
+The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId) and [`artifactId`](#artifactId) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
 
 ## Defines
 In addition to [configuring how the packager runs](#Options), you can also set Maven **defines** which provide specific values in the resulting installable AEM package. The primary required values for generating an AEM package will be automatically be extracted from your project's `package.json`, but they can be overridden by adding a `defines` object to your project's `package.json` as a `aem-packager.defines` section.
@@ -111,36 +114,36 @@ In addition to [configuring how the packager runs](#Options), you can also set M
 }
 ```
 
-### artifactId (string)
+### artifactId
 artifactId is used within AEM's package management to identify the package. Default value if unset will be the npm project name from your project's `package.json`. Must be a machine-safe string.
 
-#### Example
+#### Example of artifactId
 ```
 // For a company called "Example.org":
 "artifactId": "my-project"
 ```
 
-### description (string)
+### description
 Force the description that will be used for the AEM content package. When not defined, this will default to the description string provided by your project's `package.json`.
 
-#### Example:
+#### Example of description
 ```
 "description": "My AEM package for cool features."
 ```
 
-### groupId (string)
+### groupId
 groupId is used within AEM's package management to group related packages together. The naming convention typically follows Java package naming so it is easy to find packages in the AEM package manager. Default value if unset will be `npm`. Must be a machine-safe string.
 
-#### Example
+#### Example of groupId
 ```
 // For a company called "Example.org":
 "groupId": "org.example.myprojectgroup"
 ```
 
-### version (string)
+### version
 Force the version number that will be used for the AEM content package. When not defined, this will default to the version string provided by your project's `package.json`. Must be a [SEMVER](https://semver.org/) value.
 
-#### Example:
+#### Example of version
 ```
 "version": "1.0.0"
 ```
