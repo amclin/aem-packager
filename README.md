@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/537d95b7e8fa4e40a2534574a7b4bc26)](https://app.codacy.com/app/mailfrom/aem-packager?utm_source=github.com&utm_medium=referral&utm_content=amclin/aem-packager&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/amclin/aem-packager.svg?branch=master)](https://travis-ci.org/amclin/aem-packager)
 [![npm version](https://badge.fury.io/js/aem-packager.svg)](https://badge.fury.io/js/aem-packager)
 [![Dependencies Status](https://david-dm.org/amclin/aem-packager/status.svg)](https://david-dm.org/amclin/aem-packager)
