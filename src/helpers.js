@@ -22,7 +22,7 @@ const prefixProperties = function (obj, prefix) {
  * @param {String} prefix - Optionap prefix for finding an option in the namespace
  */
 const getNPM = function (name, prefix) {
-  prefix = prefix || '';
+  prefix = prefix || ''
   return process.env[`npm_package_${prefix}${name}`]
 }
 

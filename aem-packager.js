@@ -2,7 +2,7 @@
 const Console = console
 Console.log('Starting AEM Packager.')
 
-const {getNPM, prefixProperties} = require('./src/helpers.js')
+const { getNPM, prefixProperties } = require('./src/helpers.js')
 const path = require('path')
 const _ = require('lodash')
 
@@ -84,7 +84,7 @@ const getDefines = function (paths) {
   // Get the list of defines NPM package.json
   definesList.forEach(function (prop) {
     pkgConfigDefines[prop] = getNPM(prop, 'aem_packager_defines_')
-  }) 
+  })
 
   // Apply configurations from paths
   const pathOptions = {
@@ -138,9 +138,9 @@ defines = prefixProperties(defines, 'npm')
 Console.log(`Running AEM Packager for ${defines.npmgroupId}.${defines.npmartifactId}`)
 
 // Run maven to build a package
-mvn.execute(commands, defines).then(result => {
+mvn.execute(commands, defines).then((result) => {
   Console.log(`AEM package has been created and can be found in ${paths.mvnTarget}`)
-}).catch(result => {
+}).catch((result) => {
   Console.error('Failed to compile Maven package. See Maven log for details.')
   process.exit(1)
 })
