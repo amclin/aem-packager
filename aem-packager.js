@@ -1,28 +1,12 @@
 #!/usr/bin/env node
-
 console.log(`Starting AEM Packager.`)
 
+const {prefixProperties} = require('./src/helpers.js')
 const path = require('path')
 const _ = require('lodash')
 
 // Define defaults when configs are not provided
 const defaults = require('./src/defaults.json')
-
-/**
- * Renames properties on an object by appending a prefix to them
- * @param {Object} - Object to modify
- * @param {String} - prefix to append to the name of all the properties in the object
- * @returns {Object} - Updated object with renamed properties
- **/
-const prefixProperties = function (obj, prefix) {
-  Object.keys(obj).forEach(element => {
-    var newProp = prefix + element
-    Object.assign(obj, { [newProp]: obj[element] })
-    delete obj[element]
-  })
-
-  return obj
-}
 
 /**
  * Parses the settings to generate a paths object containing
