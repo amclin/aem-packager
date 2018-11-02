@@ -64,6 +64,23 @@ const getCommands = function (paths) {
 }
 
 /**
+ * Generates the default JCR path
+ * @param {Object} defines - The consolidates list of Maven variables
+ * @returns {String} the JCR path where the package contents should be installed in AEM
+ */
+const getDefaultJCRPath = function (defines) {
+  Console.debug('Generating a default JCR installation path.')
+  var segs = [
+    '', // force leading slash
+    'apps',
+    defines.groupId,
+    defines.artifactId,
+    'clientlibs'
+  ]
+  return segs.join('/')
+}
+
+/**
  * Gets a consolidated list of Maven defines from the various sources
  # @param {Object} paths - List of module paths
  */
@@ -104,23 +121,6 @@ const getDefines = function (paths) {
   defines.jcrPath = _.get(defines, 'jcrPath', getDefaultJCRPath(defines))
 
   return defines
-}
-
-/**
- * Generates the default JCR path
- * @param {Object} defines - The consolidates list of Maven variables
- * @returns {String} the JCR path where the package contents should be installed in AEM
- */
-const getDefaultJCRPath = function (defines) {
-  Console.debug('Generating a default JCR installation path.')
-  var segs = [
-    '', // force leading slash
-    'apps',
-    defines.groupId,
-    defines.artifactId,
-    'clientlibs'
-  ]
-  return segs.join('/')
 }
 
 // Get command line arguments
