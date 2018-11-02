@@ -9,7 +9,7 @@ const _ = require('lodash')
 const prefixProperties = function (obj, prefix) {
   _.forEach(obj, function (val, prop) {
     obj[prefix + prop] = val
-    delete obj[prefix]
+    delete obj[prop]
   })
 
   return obj
