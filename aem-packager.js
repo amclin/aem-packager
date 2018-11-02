@@ -35,7 +35,7 @@ const getOptions = function () {
 
   // Standard options extracted from NPM package.json values
   optsList.forEach(function (prop) {
-    pkgConfigOptions[prop] = getNPM(prop)
+    pkgConfigOptions[prop] = getNPM(prop, 'npm_package_aem_packager_options_')
   })
 
   _.defaults(
@@ -100,7 +100,7 @@ const getDefines = function (paths) {
 
   // Get the list of defines NPM package.json
   definesList.forEach(function (prop) {
-    pkgConfigDefines[prop] = getNPM(prop, 'aem_packager_defines_')
+    pkgConfigDefines[prop] = getNPM(prop, 'npm_package_aem_packager_defines_')
   })
 
   // Apply configurations from paths

@@ -1,11 +1,25 @@
 /* eslint-env mocha */
 
 const expect = require('chai').expect
-const { prefixProperties } = require('../src/helpers.js')
+const { getNPM, prefixProperties } = require('../src/helpers.js')
 
 const _getRandomString = function () {
   return Math.random().toString(36).substring(2, 15)
 }
+
+describe('getNPM()', () => {
+  it('retrieves value from specified property in process.env with specified prefix.', () => {
+    const expected = process.env.npm_config_node_version
+    const actual = getNPM('node_version', 'npm_config_')
+    expect(actual).to.equal(expected)
+  })
+
+  it('uses the prefix \'npm_package_\' when no prefix is provided.', () => {
+    const expected = process.env.npm_package_name
+    const actual = getNPM('name')
+    expect(actual).to.equal(expected)
+  })
+})
 
 describe('prefixProperties()', () => {
   var testPrefix
