@@ -1,5 +1,4 @@
 const _ = require('lodash')
-
 /**
  * Renames properties on an object by prepending a prefix to them. Mutates the original object.
  * @param {Object} - Object to modify
@@ -9,7 +8,7 @@ const _ = require('lodash')
 const prefixProperties = function (obj, prefix) {
   _.forEach(obj, function (val, prop) {
     obj[prefix + prop] = val
-    delete obj[prefix]
+    delete obj[prop]
   })
 
   return obj
@@ -22,8 +21,8 @@ const prefixProperties = function (obj, prefix) {
  * @param {String} prefix - Optionap prefix for finding an option in the namespace
  */
 const getNPM = function (name, prefix) {
-  prefix = prefix || ''
-  return process.env[`npm_package_${prefix}${name}`]
+  prefix = prefix || 'npm_package_'
+  return process.env[`${prefix}${name}`]
 }
 
 module.exports.prefixProperties = prefixProperties
