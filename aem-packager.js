@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-console.log(`Starting AEM Packager.`)
+const Console = console
+Console.log('Starting AEM Packager.')
 
 const {getNPM, prefixProperties} = require('./src/helpers.js')
 const path = require('path')
@@ -15,6 +16,7 @@ const defaults = require('./src/defaults.json')
  * @returns {Object} - paths
  */
 const getPaths = function (options) {
+  Console.debug('Processing Paths.')
   return {
     pom: path.resolve(__dirname, 'src/pom.xml'),
     mvnTarget: path.resolve(process.cwd(), options.buildDir),
@@ -26,6 +28,7 @@ const getPaths = function (options) {
  * Gets a consolidated options object from the various sources
  */
 const getOptions = function () {
+  Console.debug('Processing Options.')
   var options = {}
   var pkgConfigOptions = {}
   const optsList = Object.keys(defaults.options) // List of known options for aem-packager
@@ -50,6 +53,7 @@ const getOptions = function () {
  * @param {Array} commands to run in Maven
  */
 const getCommands = function (paths) {
+  Console.debug('Processing Maven Commands.')
   return [
     '-f',
     paths.pom,
@@ -64,6 +68,7 @@ const getCommands = function (paths) {
  # @param {Object} paths - List of module paths
  */
 const getDefines = function (paths) {
+  Console.debug('Processing list of Defines.')
   var defines = {}
   var pkgDefines = {}
   var pkgConfigDefines = {}
@@ -107,6 +112,7 @@ const getDefines = function (paths) {
  * @returns {String} the JCR path where the package contents should be installed in AEM
  */
 const getDefaultJCRPath = function (defines) {
+  Console.debug('Generating a default JCR installation path.')
   var segs = [
     '', // force leading slash
     'apps',
@@ -129,12 +135,12 @@ var defines = getDefines(paths)
 // Prepare the variables for the pom.xml
 defines = prefixProperties(defines, 'npm')
 
-console.log(`Running AEM Packager for ${defines.npmgroupId}.${defines.npmartifactId}`)
+Console.log(`Running AEM Packager for ${defines.npmgroupId}.${defines.npmartifactId}`)
 
 // Run maven to build a package
 mvn.execute(commands, defines).then(result => {
-  console.log(`AEM package has been created and can be found in ${paths.mvnTarget}`)
+  Console.log(`AEM package has been created and can be found in ${paths.mvnTarget}`)
 }).catch(result => {
-  console.error('Failed to compile Maven package. See Maven log for details.')
+  Console.error('Failed to compile Maven package. See Maven log for details.')
   process.exit(1)
 })
