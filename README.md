@@ -2,6 +2,7 @@
 [![npm version](https://badge.fury.io/js/aem-packager.svg)](https://badge.fury.io/js/aem-packager)
 [![Dependencies Status](https://david-dm.org/amclin/aem-packager/status.svg)](https://david-dm.org/amclin/aem-packager)
 [![devDependencies Status](https://david-dm.org/amclin/aem-packager/dev-status.svg)](https://david-dm.org/amclin/aem-packager?type=dev)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/537d95b7e8fa4e40a2534574a7b4bc26)](https://app.codacy.com/app/mailfrom/aem-packager?utm_source=github.com&utm_medium=referral&utm_content=amclin/aem-packager&utm_campaign=Badge_Grade_Dashboard)
 # aem-packager
 Creates AEM packages for NodeJS projects that can then be installed through the Adobe Experience Manager package manager. Combined with the [aem-clientlib-generator](https://www.npmjs.com/package/aem-clientlib-generator) this provides a rich end-to-end workflow for developing JS and CSS for injection into AEM as components, libraries, applications, or contents.
 
