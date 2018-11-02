@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 console.log(`Starting AEM Packager.`)
 
-const {prefixProperties} = require('./src/helpers.js')
+const {getNPM, prefixProperties} = require('./src/helpers.js')
 const path = require('path')
 const _ = require('lodash')
 
@@ -24,12 +24,16 @@ const getPaths = function (options) {
 
 /**
  * Gets a consolidated options object from the various sources
- * @param {Object} pkg - NPM package JSON
  */
-const getOptions = function (pkg) {
+const getOptions = function () {
   var options = {}
-  // Override values from the NPM package.json
-  const pkgConfigOptions = _.get(pkg, 'aem-packager.options', {})
+  var pkgConfigOptions = {}
+  const optsList = Object.keys(defaults.options) // List of known options for aem-packager
+
+  // Standard options extracted from NPM package.json values
+  optsList.forEach(function (prop) {
+    pkgConfigOptions[prop] = getNPM(prop)
+  })
 
   _.defaults(
     options,
@@ -57,21 +61,26 @@ const getCommands = function (paths) {
 
 /**
  * Gets a consolidated list of Maven defines from the various sources
- * @param {Object} pkg - NPM package JSON
  # @param {Object} paths - List of module paths
  */
-const getDefines = function (pkg, paths) {
+const getDefines = function (paths) {
   var defines = {}
+  var pkgDefines = {}
+  var pkgConfigDefines = {}
+  const stdProps = ['name', 'description', 'version'] // Standard properties available in any package.json
+  const definesList = Object.keys(defaults.defines) // List of known defines for aem-packager
 
   // Standard properites extracted from NPM package.json values
-  const pkgDefines = {
-    artifactId: pkg.name,
-    description: pkg.description,
-    name: pkg.name,
-    version: pkg.version
-  }
-  // Override values from the NPM package.json
-  const pkgConfigDefines = _.get(pkg, 'aem-packager.defines', {})
+  stdProps.forEach(function (prop) {
+    pkgDefines[prop] = getNPM(prop)
+  })
+  pkgDefines.artifactId = getNPM('name')
+
+  // Get the list of defines NPM package.json
+  definesList.forEach(function (prop) {
+    pkgConfigDefines[prop] = getNPM(prop, 'aem_packager_defines_')
+  }) 
+
   // Apply configurations from paths
   const pathOptions = {
     dist: paths.npmOut,
@@ -112,12 +121,11 @@ const getDefaultJCRPath = function (defines) {
 // const [,, ...args] = process.argv
 
 const mvn = require('maven').create({})
-const pkg = require(path.resolve(process.cwd(), 'package.json'))
 
-const options = getOptions(pkg)
+const options = getOptions()
 const paths = getPaths(options)
 const commands = getCommands(paths)
-var defines = getDefines(pkg, paths)
+var defines = getDefines(paths)
 // Prepare the variables for the pom.xml
 defines = prefixProperties(defines, 'npm')
 
