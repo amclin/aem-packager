@@ -16,6 +16,7 @@
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH-mm-ss'Z'</maven.build.timestamp.format>
 		<project.jcrPath>${npmjcrPath}</project.jcrPath>
 		<project.src>${npmsrcDir}</project.src>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<pluginRepositories>
@@ -40,10 +41,12 @@
 				<groupId>com.day.jcr.vault</groupId>
 				<artifactId>maven-vault-plugin</artifactId>
 				<extensions>true</extensions>
+				<version>0.0.10</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
 				<executions>
 					<execution>
 						<id>copy-content-resources</id>
@@ -65,7 +68,7 @@
 			<plugin>
 				<groupId>com.day.jcr.vault</groupId>
 				<artifactId>content-package-maven-plugin</artifactId>
-				<version>0.0.18</version>
+				<version>0.0.24</version>
 				<extensions>true</extensions>
 				<configuration>
 					<name>${project.name}</name>
