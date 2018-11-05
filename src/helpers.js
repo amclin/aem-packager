@@ -36,5 +36,20 @@ const getNPM = function (name, prefix) {
   return getFromEnv([prefix, name])
 }
 
+/**
+ * Retreives the config values that can be determined from any project's package.json
+ */
+const getProjectConfigs = function () {
+  var configs = {}
+  const stdProps = ['name', 'description', 'version'] // Standard properties available in any package.json
+  stdProps.forEach((prop) => {
+    configs[prop] = getFromEnv(['npm', 'package', prop])
+  })
+  configs.artifactId = getFromEnv(['npm', 'package', 'name'])
+
+  return configs
+}
+
 module.exports.prefixProperties = prefixProperties
 module.exports.getNPM = getNPM
+module.exports.getProjectConfigs = getProjectConfigs

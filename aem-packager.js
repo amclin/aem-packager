@@ -2,7 +2,7 @@
 const Console = console
 Console.log('Starting AEM Packager.')
 
-const { getNPM, prefixProperties } = require('./src/helpers.js')
+const { getNPM, getProjectConfigs, prefixProperties } = require('./src/helpers.js')
 const path = require('path')
 const _ = require('lodash')
 
@@ -87,16 +87,9 @@ const getDefaultJCRPath = function (defines) {
 const getDefines = function (paths) {
   Console.debug('Processing list of Defines.')
   var defines = {}
-  var pkgDefines = {}
+  var pkgDefines = getProjectConfigs()
   var pkgConfigDefines = {}
-  const stdProps = ['name', 'description', 'version'] // Standard properties available in any package.json
   const definesList = Object.keys(defaults.defines) // List of known defines for aem-packager
-
-  // Standard properites extracted from NPM package.json values
-  stdProps.forEach(function (prop) {
-    pkgDefines[prop] = getNPM(prop)
-  })
-  pkgDefines.artifactId = getNPM('name')
 
   // Get the list of defines NPM package.json
   definesList.forEach(function (prop) {

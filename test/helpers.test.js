@@ -1,7 +1,11 @@
 /* eslint-env mocha */
 
 const expect = require('chai').expect
-const { getNPM, prefixProperties } = require('../src/helpers.js')
+const {
+  getNPM,
+  getProjectConfigs,
+  prefixProperties
+} = require('../src/helpers.js')
 
 const _getRandomString = function () {
   return Math.random().toString(36).substring(2, 15)
@@ -18,6 +22,17 @@ describe('getNPM()', () => {
     const expected = process.env.npm_package_name
     const actual = getNPM('name')
     expect(actual).to.equal(expected)
+  })
+})
+
+describe('getProjectConfigs()', () => {
+  it('retrieves the artifactId, description, name, and version from the process.', () => {
+    const result = getProjectConfigs()
+    const keys = ['name', 'version', 'description']
+    keys.forEach((key) => {
+      expect(result[key]).to.equal(process.env['npm_package_' + key])
+    })
+    expect(result.artifactId).to.equal(process.env.npm_package_name)
   })
 })
 
