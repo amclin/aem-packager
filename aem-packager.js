@@ -3,6 +3,7 @@ const Console = console
 Console.log('Starting AEM Packager.')
 
 const {
+  getCommands,
   getConfigsFromProcess,
   getNPM,
   getProjectConfigs,
@@ -35,22 +36,6 @@ const getPaths = function (options) {
     mvnTarget: path.resolve(process.cwd(), options.buildDir),
     npmOut: path.resolve(process.cwd(), options.srcDir)
   }
-}
-
-/**
- * Prepares the list of Maven commands
- * @param {Ojbect} paths - Modules paths list
- * @param {Array} commands to run in Maven
- */
-const getCommands = function (paths) {
-  Console.debug('Determining Maven Commands.')
-  return [
-    '-f',
-    paths.pom,
-    'clean',
-    'install',
-    '-Pnpm' // Force a build profile that lets us set the Maven build target folder
-  ]
 }
 
 /**
@@ -112,7 +97,7 @@ const getDefines = function (paths) {
 const mvn = require('maven').create({})
 
 const paths = getPaths(configs.options)
-const commands = getCommands(paths)
+const commands = getCommands(paths.pom)
 var defines = getDefines(paths)
 // Prepare the variables for the pom.xml
 defines = prefixProperties(defines, 'npm')

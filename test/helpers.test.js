@@ -2,6 +2,7 @@
 
 const expect = require('chai').expect
 const {
+  getCommands,
   getNPM,
   getProjectConfigs,
   getConfigsFromProcess,
@@ -11,6 +12,15 @@ const {
 const _getRandomString = function () {
   return Math.random().toString(36).substring(2, 15)
 }
+
+describe('getCommands()', () => {
+  it('returns an array with the specified string in the correct order', () => {
+    const test = _getRandomString()
+    const expected = ['-f', test, 'clean', 'install', '-Pnpm']
+    const actual = getCommands(test)
+    expect(actual).to.deep.equal(expected)
+  })
+})
 
 describe('getNPM()', () => {
   it('retrieves value from specified property in process.env with specified prefix.', () => {

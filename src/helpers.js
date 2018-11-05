@@ -16,6 +16,21 @@ const prefixProperties = function (obj, prefix) {
 }
 
 /**
+ * Returns a list of Maven commands as an array
+ * @param {String} path - Path to maven pom.xml
+ * @param {Array} commands to run in Maven
+ */
+const getCommands = function (path) {
+  return [
+    '-f',
+    path,
+    'clean',
+    'install',
+    '-Pnpm' // Force a build profile that lets us set the Maven build target folder
+  ]
+}
+
+/**
  * Gets the project details from the NPM running process, and therefore from
  * the package.json of the calling project
  * @returns {Object} - Configuration options and defines from the running process
@@ -79,6 +94,7 @@ const getProjectConfigs = function () {
 }
 
 module.exports.prefixProperties = prefixProperties
+module.exports.getCommands = getCommands
 module.exports.getConfigsFromProcess = getConfigsFromProcess
 module.exports.getNPM = getNPM
 module.exports.getProjectConfigs = getProjectConfigs
