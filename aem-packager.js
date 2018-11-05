@@ -2,12 +2,25 @@
 const Console = console
 Console.log('Starting AEM Packager.')
 
-const { getNPM, getProjectConfigs, prefixProperties } = require('./src/helpers.js')
+const {
+  getConfigsFromProcess,
+  getNPM,
+  getProjectConfigs,
+  prefixProperties
+} = require('./src/helpers.js')
 const path = require('path')
 const _ = require('lodash')
 
 // Define defaults when configs are not provided
 const defaults = require('./src/defaults.json')
+
+var configs = {}
+_.defaults(
+  configs,
+  getConfigsFromProcess(defaults),
+  getProjectConfigs(),
+  defaults
+)
 
 /**
  * Parses the settings to generate a paths object containing
@@ -25,35 +38,12 @@ const getPaths = function (options) {
 }
 
 /**
- * Gets a consolidated options object from the various sources
- */
-const getOptions = function () {
-  Console.debug('Processing Options.')
-  var options = {}
-  var pkgConfigOptions = {}
-  const optsList = Object.keys(defaults.options) // List of known options for aem-packager
-
-  // Standard options extracted from NPM package.json values
-  optsList.forEach(function (prop) {
-    pkgConfigOptions[prop] = getNPM(prop, 'npm_package_aem_packager_options_')
-  })
-
-  _.defaults(
-    options,
-    pkgConfigOptions,
-    defaults.options // Default fallback options defined in this module
-  )
-
-  return options
-}
-
-/**
  * Prepares the list of Maven commands
  * @param {Ojbect} paths - Modules paths list
  * @param {Array} commands to run in Maven
  */
 const getCommands = function (paths) {
-  Console.debug('Processing Maven Commands.')
+  Console.debug('Determining Maven Commands.')
   return [
     '-f',
     paths.pom,
@@ -121,8 +111,7 @@ const getDefines = function (paths) {
 
 const mvn = require('maven').create({})
 
-const options = getOptions()
-const paths = getPaths(options)
+const paths = getPaths(configs.options)
 const commands = getCommands(paths)
 var defines = getDefines(paths)
 // Prepare the variables for the pom.xml

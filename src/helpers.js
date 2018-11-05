@@ -1,4 +1,5 @@
 const _ = require('lodash')
+
 /**
  * Renames properties on an object by prepending a prefix to them. Mutates the original object.
  * @param {Object} - Object to modify
@@ -12,6 +13,33 @@ const prefixProperties = function (obj, prefix) {
   })
 
   return obj
+}
+
+/**
+ * Gets the project details from the NPM running process, and therefore from
+ * the package.json of the calling project
+ * @returns {Object} - Configuration options and defines from the running process
+ */
+const getConfigsFromProcess = function (defaults) {
+  var result = {}
+
+  // Walk the defaults object and map the names back to process.env names so we can find them
+  _.forEach(defaults, (val, config) => {
+    result[config] = {}
+    _.forEach(defaults[config], (val, property) => {
+      const searchSegments = [
+        'npm',
+        'package', // namespace of where package.json options are stored
+        'aem-packager', // namespace of this plugin
+        config,
+        property
+      ]
+      // get the value
+      result[config][property] = getFromEnv(searchSegments)
+    })
+  })
+
+  return result
 }
 
 /**
@@ -51,5 +79,6 @@ const getProjectConfigs = function () {
 }
 
 module.exports.prefixProperties = prefixProperties
+module.exports.getConfigsFromProcess = getConfigsFromProcess
 module.exports.getNPM = getNPM
 module.exports.getProjectConfigs = getProjectConfigs

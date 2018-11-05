@@ -4,6 +4,7 @@ const expect = require('chai').expect
 const {
   getNPM,
   getProjectConfigs,
+  getConfigsFromProcess,
   prefixProperties
 } = require('../src/helpers.js')
 
@@ -15,6 +16,8 @@ describe('getNPM()', () => {
   it('retrieves value from specified property in process.env with specified prefix.', () => {
     const expected = process.env.npm_config_node_version
     const actual = getNPM('node_version', 'npm_config_')
+    const util = require('util')
+    console.log(util.inspect(process.env, false, null, true /* enable colors */))
     expect(actual).to.equal(expected)
   })
 
@@ -33,6 +36,23 @@ describe('getProjectConfigs()', () => {
       expect(result[key]).to.equal(process.env['npm_package_' + key])
     })
     expect(result.artifactId).to.equal(process.env.npm_package_name)
+  })
+})
+
+describe('getConfigsFromProcess()', () => {
+  it('retrieves specified configuration key map from process.env.npm_package_aem_packager namespace', () => {
+    const space = 'npm_package_aem_packager'
+    const key = 'key' + _getRandomString()
+    const subkey = 'subKey' + _getRandomString()
+    const expected = _getRandomString()
+    const envKey = [space, key, subkey].join('_')
+    const testObj = {}
+    testObj[key] = {}
+    testObj[key][subkey] = _getRandomString()
+    // Put dummy data into process.env for testing
+    process.env[envKey] = expected
+    const result = getConfigsFromProcess(testObj)
+    expect(result[key][subkey]).to.equal(expected)
   })
 })
 
