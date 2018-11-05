@@ -68,18 +68,6 @@ const getFromEnv = function (searchPath) {
 }
 
 /**
- * Gets an NPM package.json property by name
- * This is shorthand for process.env.npm_package_<name>
- * @param {String} name
- * @param {String} prefix - Optionap prefix for finding an option in the namespace
- */
-const getNPM = function (name, prefix) {
-  prefix = prefix || 'npm_package'
-  prefix = prefix.replace(/_$/, '') // remove trailing _ if there is one
-  return getFromEnv([prefix, name])
-}
-
-/**
  * Retreives the config values that can be determined from any project's package.json
  */
 const getProjectConfigs = function () {
@@ -96,5 +84,4 @@ const getProjectConfigs = function () {
 module.exports.prefixProperties = prefixProperties
 module.exports.getCommands = getCommands
 module.exports.getConfigsFromProcess = getConfigsFromProcess
-module.exports.getNPM = getNPM
 module.exports.getProjectConfigs = getProjectConfigs

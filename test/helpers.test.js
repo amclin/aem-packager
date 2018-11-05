@@ -3,7 +3,6 @@
 const expect = require('chai').expect
 const {
   getCommands,
-  getNPM,
   getProjectConfigs,
   getConfigsFromProcess,
   prefixProperties
@@ -19,22 +18,6 @@ describe('getCommands()', () => {
     const expected = ['-f', test, 'clean', 'install', '-Pnpm']
     const actual = getCommands(test)
     expect(actual).to.deep.equal(expected)
-  })
-})
-
-describe('getNPM()', () => {
-  it('retrieves value from specified property in process.env with specified prefix.', () => {
-    const expected = process.env.npm_config_node_version
-    const actual = getNPM('node_version', 'npm_config_')
-    const util = require('util')
-    console.log(util.inspect(process.env, false, null, true /* enable colors */))
-    expect(actual).to.equal(expected)
-  })
-
-  it('uses the prefix \'npm_package_\' when no prefix is provided.', () => {
-    const expected = process.env.npm_package_name
-    const actual = getNPM('name')
-    expect(actual).to.equal(expected)
   })
 })
 

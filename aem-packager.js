@@ -5,7 +5,6 @@ Console.log('Starting AEM Packager.')
 const {
   getCommands,
   getConfigsFromProcess,
-  getNPM,
   getProjectConfigs,
   prefixProperties
 } = require('./src/helpers.js')
