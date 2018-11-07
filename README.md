@@ -55,19 +55,78 @@ The resulting `.zip` file will be outpt to the `target` folder by default. You s
 
 ![Package installed in AEM Package Manager](docs/installed-package.png)
 
-### Package Name
+### Package Filename
 AEM requires SEMVER versioning in order for packages to be recognized as version updates. AEM also cannot safely install an older version of a package over a new version, which is why the filename contains a timestamp to guarantee sequential uniqueness.
 
 The output package name uses the pattern:
 
 `{groupId}-{artifactId}-{version}-{timestamp}.zip`
 
-#### Example
+#### Example Filename
 
 `npm-package-test-1.1.0-2018-10-31T18-22-42Z.zip`
 
 ## Dependencies
 **aem-packager** is a wrapper around [Adobe's Maven plugin](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/vlt-mavenplugin.html) for building content packages. Therefore, you will need [Maven installed on your system](https://maven.apache.org/install.html).
+
+### Basics
+Configuration of *aem-packager* has 2 distinct parts. [Options](#options) are used for setting how the packaging process runs, and [Defines](#defines) are used to override specific variables within the final package. Both `options` and `defines` can be configured by defining an object containing those two properties:
+
+```json
+{
+  "options": {...},
+  "defines": {...}
+}
+```
+
+### Specifying Configurations
+The configurations can be provided in one of 2 ways:
+
+1. Set the configuration in your [`package.json`](#packagejson-configuration-example)
+2. Specify your own [config file](#yaml-config-file-example)
+
+#### package.json configuration example
+```json
+{
+  "name": "my-npm-project",
+  "description": "My AEM package for cool features.",
+  "version": "0.2.3",
+  "scripts": {...},
+  "dependencies": {...},
+  "aem-packager": {
+    "options": {
+        "srcDir": "dist",
+        "buildDir": "target",
+        "jcrPath": "/apps/mygroup/myapp/clientlibs"
+    },
+    "defines": {
+        "artifactId": "my-project",
+        "groupId": "org.example.myprojectgroup",
+        "version": "1.2.3"
+    }
+  }
+}
+```
+
+#### Configuration File
+You can specify your own JSON or YAML config file through a command line argument when running aem-packager:
+`aem-packager --config ./config/my-config-file.yml`
+
+##### YAML Config File Exapmle
+```yaml
+options:
+  srcDir: dist
+  buildDir: target
+  jcrPath: /apps/mygroup/myapp/clientlibs
+defines:
+  artifactId: my-project
+  description: My AEM package for cool features.
+  groupId: org.example.myprojectgroup
+  version: '1.2.3'
+```
+
+#### Define your own
+
 
 ## Packager Options
 The settings for running the packager are populated through the `options` object. This can be added to your project's `package.json` as a `aem-packager.options` section.
