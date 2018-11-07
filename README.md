@@ -11,9 +11,9 @@ Creates AEM packages for NodeJS projects that can then be installed through the 
 
 2.  [Dependencies](#dependencies)
 
-3.  [Packager Options](#options)
-
-4.  [Package Defines](#defines)
+3.  [Configuration](#configuration)
+    1.  [Packager Options](#options)
+    2.  [Package Defines](#defines)
 
 ## Using
 Install **aem-packager** as a dependency for your NodeJS project:
@@ -83,7 +83,7 @@ Configuration of *aem-packager* has 2 distinct parts. [Options](#options) are us
 The configurations can be provided in one of 2 ways:
 
 1. Set the configuration in your [`package.json`](#packagejson-configuration-example)
-2. Specify your own [config file](#yaml-config-file-example)
+2. Specify your own [YAML or JSON config file](#configuration-file)
 
 #### package.json configuration example
 ```json
@@ -110,6 +110,7 @@ The configurations can be provided in one of 2 ways:
 
 #### Configuration File
 You can specify your own JSON or YAML config file through a command line argument when running aem-packager:
+
 `aem-packager --config ./config/my-config-file.yml`
 
 ##### YAML Config File Exapmle
