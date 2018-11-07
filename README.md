@@ -69,6 +69,8 @@ The output package name uses the pattern:
 ## Dependencies
 **aem-packager** is a wrapper around [Adobe's Maven plugin](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/vlt-mavenplugin.html) for building content packages. Therefore, you will need [Maven installed on your system](https://maven.apache.org/install.html).
 
+## Configuration
+
 ### Basics
 Configuration of *aem-packager* has 2 distinct parts. [Options](#options) are used for setting how the packaging process runs, and [Defines](#defines) are used to override specific variables within the final package. Both `options` and `defines` can be configured by defining an object containing those two properties:
 
@@ -82,8 +84,8 @@ Configuration of *aem-packager* has 2 distinct parts. [Options](#options) are us
 ### Specifying Configurations
 The configurations can be provided in one of 2 ways:
 
-1. Set the configuration in your [`package.json`](#packagejson-configuration-example)
-2. Specify your own [YAML or JSON config file](#configuration-file)
+1.  Set the configuration in your [`package.json`](#packagejson-configuration-example)
+2.  Specify your own [YAML or JSON config file](#configuration-file)
 
 #### package.json configuration example
 ```json
@@ -126,10 +128,7 @@ defines:
   version: '1.2.3'
 ```
 
-#### Define your own
-
-
-## Packager Options
+### Packager Options
 The settings for running the packager are populated through the `options` object. This can be added to your project's `package.json` as a `aem-packager.options` section.
 
 ```json
@@ -146,16 +145,16 @@ The settings for running the packager are populated through the `options` object
 }
 ```
 
-### srcDir (string)
+#### srcDir (string)
 The directory where your compiled files are located waiting to be packaged. Defaults to `dist` when not provided. All files within the folder will be included in the AEM package, so make sure that the output has been sanitized to only the files you wish to deploy.
 
-### buildDir (string)
+#### buildDir (string)
 The working directory that Maven will use for compiling the build package. Defaults to `target` when not provided.
 
-### jcrPath (string)
+#### jcrPath (string)
 The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId) and [`artifactId`](#artifactId) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
 
-## Defines
+### Defines
 In addition to [configuring how the packager runs](#Options), you can also set Maven **defines** which provide specific values in the resulting installable AEM package. The primary required values for generating an AEM package will be automatically be extracted from your project's `package.json`, but they can be overridden by adding a `defines` object to your project's `package.json` as a `aem-packager.defines` section.
 
 ```json
@@ -173,35 +172,35 @@ In addition to [configuring how the packager runs](#Options), you can also set M
 }
 ```
 
-### artifactId
+#### artifactId
 Used within AEM's package management to identify the package. Default value if unset will be the npm project name from your project's `package.json`. Must be a machine-safe string. Restricting to lowercase and hypphens is recommended to prevent conflicts.
 
-#### Example of artifactId
+##### Example of artifactId
 ```json
 "artifactId": "my-project"
 ```
 
-### description
+#### description
 Human-readable description that will be used for the AEM content package. When not defined, this will default to the description string provided by your project's `package.json`.
 
-#### Example of description
+##### Example of description
 ```json
 "description": "My AEM package for cool features."
 ```
 
-### groupId
+#### groupId
 Used within AEM's package management to group related packages together. The naming convention typically follows Java package naming so it is easy to find packages in the AEM package manager. Default value if unset will be `npm`. Must be a machine-safe string.
 
-#### Example of groupId
+##### Example of groupId
 For a company called "Example.org":
 ```json
 "groupId": "org.example.myprojectgroup"
 ```
 
-### version
+#### version
 Force the version number that will be used for the AEM content package. When not defined, this will default to the version string provided by your project's `package.json`. Must be a [SEMVER](https://semver.org/) value.
 
-#### Example of version
+##### Example of version
 ```json
 "version": "1.0.0"
 ```
