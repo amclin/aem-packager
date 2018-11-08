@@ -114,11 +114,13 @@ const getPackageNamespace = function () {
  */
 const getProjectConfigs = function () {
   var configs = {}
-  const stdProps = ['name', 'description', 'version'] // Standard properties available in any package.json
+  const stdProps = ['description', 'version'] // Standard properties available in any package.json
   stdProps.forEach((prop) => {
     configs[prop] = getFromEnv(['npm', 'package', prop])
   })
-  configs.artifactId = getFromEnv(['npm', 'package', 'name'])
+  configs.name = getPackageName()
+  configs.artifactId = configs.name
+  configs.groupId = getPackageNamespace()
 
   return configs
 }
