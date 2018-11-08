@@ -68,20 +68,45 @@ const getFromEnv = function (searchPath) {
 }
 
 /**
+ * Parses the NPM package name from the running process
+ * @returns {Object} Package name and group. '@foo/bar' would result in:
+ *   { group: 'foo', name: 'bar' }
+ */
+const _parseProcessPackageName = function () {
+  var info = {}
+  var data = process.env.npm_package_name.split('/')
+  if (data.length > 1) {
+    // name and group are present
+    info.name = data[1]
+    info.group = data[0]
+    // trim leading @ from group
+    while (info.group.charAt(0) === '@') {
+      info.group = info.group.substr(1)
+    }
+  } else {
+    // Name only
+    info.name = data[0]
+  }
+
+  return info
+}
+
+/**
+ * Extracts the maven-safe package name from the running process
+ * example: Project named '@foo/bar' would return 'bar'
+ * @returns {String} Name of package without namespace prefix
+ */
+const getPackageName = function () {
+  return _parseProcessPackageName().name
+}
+
+/**
  * Extracts the group from the namespaced NPM project title in the running process
  * example: Project named '@foo/bar' would return 'foo'
  * @returns {String} Extracted namespace without the leading @. Undefined if no match.
  */
 const getPackageNamespace = function () {
-  const name = process.env.npm_package_name
-  if (name.charAt(0) !== '@') {
-    return
-  }
-  var group = name.split('/')[0]
-  while (group.charAt(0) === '@') {
-    group = group.substr(1)
-  }
-  return group
+  return _parseProcessPackageName().group
 }
 
 /**
@@ -102,6 +127,7 @@ module.exports = {
   prefixProperties: prefixProperties,
   getCommands: getCommands,
   getConfigsFromProcess: getConfigsFromProcess,
+  getPackageName: getPackageName,
   getPackageNamespace: getPackageNamespace,
   getProjectConfigs: getProjectConfigs
 }

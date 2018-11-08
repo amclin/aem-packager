@@ -5,6 +5,7 @@ const {
   getCommands,
   getConfigsFromProcess,
   getProjectConfigs,
+  getPackageName,
   getPackageNamespace,
   prefixProperties
 } = require('../src/helpers.js')
@@ -47,6 +48,22 @@ describe('getConfigsFromProcess()', () => {
     process.env[envKey] = expected
     const result = getConfigsFromProcess(testObj)
     expect(result[key][subkey]).to.equal(expected)
+  })
+})
+
+describe('getPackageName()', () => {
+  it('retrieves the name used of the package running NPM process.', () => {
+    const expected = 'test' + _getRandomString()
+    process.env.npm_package_name = expected
+    const actual = getPackageName()
+    expect(actual).to.equal(expected)
+  })
+  it('strips out the prefix for namespaced packages', () => {
+    const expected = 'test' + _getRandomString()
+    const packageName = ['@', _getRandomString(), '/', expected].join('')
+    process.env.npm_package_name = packageName
+    const actual = getPackageName()
+    expect(actual).to.equal(expected)
   })
 })
 
