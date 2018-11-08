@@ -3,8 +3,9 @@
 const expect = require('chai').expect
 const {
   getCommands,
-  getProjectConfigs,
   getConfigsFromProcess,
+  getProjectConfigs,
+  getPackageNamespace,
   prefixProperties
 } = require('../src/helpers.js')
 
@@ -46,6 +47,22 @@ describe('getConfigsFromProcess()', () => {
     process.env[envKey] = expected
     const result = getConfigsFromProcess(testObj)
     expect(result[key][subkey]).to.equal(expected)
+  })
+})
+
+describe('getPackageNamespace()', () => {
+  it('retrieves the namespace used as a prefix on running NPM process.', () => {
+    const expected = 'test' + _getRandomString()
+    const packageName = ['@', expected, '/', _getRandomString()].join('')
+    process.env.npm_package_name = packageName
+    const actual = getPackageNamespace()
+    expect(actual).to.equal(expected)
+  })
+  it('returns undefined when there is no namespace in the running NPM package name.', () => {
+    const packageName = 'test' + _getRandomString()
+    process.env.npm_package_name = packageName
+    const actual = getPackageNamespace()
+    expect(actual).to.be.an('undefined')
   })
 })
 

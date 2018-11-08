@@ -68,6 +68,23 @@ const getFromEnv = function (searchPath) {
 }
 
 /**
+ * Extracts the group from the namespaced NPM project title in the running process
+ * example: Project named '@foo/bar' would return 'foo'
+ * @returns {String} Extracted namespace without the leading @. Undefined if no match.
+ */
+const getPackageNamespace = function () {
+  const name = process.env.npm_package_name
+  if (name.charAt(0) !== '@') {
+    return
+  }
+  var group = name.split('/')[0]
+  while (group.charAt(0) === '@') {
+    group = group.substr(1)
+  }
+  return group
+}
+
+/**
  * Retreives the config values that can be determined from any project's package.json
  */
 const getProjectConfigs = function () {
@@ -81,7 +98,10 @@ const getProjectConfigs = function () {
   return configs
 }
 
-module.exports.prefixProperties = prefixProperties
-module.exports.getCommands = getCommands
-module.exports.getConfigsFromProcess = getConfigsFromProcess
-module.exports.getProjectConfigs = getProjectConfigs
+module.exports = {
+  prefixProperties: prefixProperties,
+  getCommands: getCommands,
+  getConfigsFromProcess: getConfigsFromProcess,
+  getPackageNamespace: getPackageNamespace,
+  getProjectConfigs: getProjectConfigs
+}
