@@ -6,7 +6,7 @@ const {
   getConfigsFromProcess,
   getProjectConfigs,
   getPackageName,
-  getPackageNamespace,
+  getPackageScope,
   prefixProperties
 } = require('../src/helpers.js')
 
@@ -58,7 +58,7 @@ describe('getPackageName()', () => {
     const actual = getPackageName()
     expect(actual).to.equal(expected)
   })
-  it('strips out the prefix for namespaced packages', () => {
+  it('strips out the prefix for scoped packages', () => {
     const expected = 'test' + _getRandomString()
     const packageName = ['@', _getRandomString(), '/', expected].join('')
     process.env.npm_package_name = packageName
@@ -67,18 +67,18 @@ describe('getPackageName()', () => {
   })
 })
 
-describe('getPackageNamespace()', () => {
-  it('retrieves the namespace used as a prefix on running NPM process.', () => {
+describe('getPackageScope()', () => {
+  it('retrieves the scope used as a prefix on running NPM package name.', () => {
     const expected = 'test' + _getRandomString()
     const packageName = ['@', expected, '/', _getRandomString()].join('')
     process.env.npm_package_name = packageName
-    const actual = getPackageNamespace()
+    const actual = getPackageScope()
     expect(actual).to.equal(expected)
   })
-  it('returns undefined when there is no namespace in the running NPM package name.', () => {
+  it('returns undefined when there is no scope in the running NPM package name.', () => {
     const packageName = 'test' + _getRandomString()
     process.env.npm_package_name = packageName
-    const actual = getPackageNamespace()
+    const actual = getPackageScope()
     expect(actual).to.be.an('undefined')
   })
 })

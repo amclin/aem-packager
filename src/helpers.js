@@ -94,18 +94,18 @@ const _parseProcessPackageName = function () {
 /**
  * Extracts the maven-safe package name from the running process
  * example: Project named '@foo/bar' would return 'bar'
- * @returns {String} Name of package without namespace prefix
+ * @returns {String} Name of package without scope prefix
  */
 const getPackageName = function () {
   return _parseProcessPackageName().name
 }
 
 /**
- * Extracts the group from the namespaced NPM project title in the running process
+ * Extracts the group from the scoped NPM project title in the running process
  * example: Project named '@foo/bar' would return 'foo'
- * @returns {String} Extracted namespace without the leading @. Undefined if no match.
+ * @returns {String} Extracted scoped without the leading @. Undefined if no match.
  */
-const getPackageNamespace = function () {
+const getPackageScope = function () {
   return _parseProcessPackageName().group
 }
 
@@ -120,7 +120,7 @@ const getProjectConfigs = function () {
   })
   configs.name = getPackageName()
   configs.artifactId = configs.name
-  configs.groupId = getPackageNamespace()
+  configs.groupId = getPackageScope()
 
   return configs
 }
@@ -130,6 +130,6 @@ module.exports = {
   getCommands: getCommands,
   getConfigsFromProcess: getConfigsFromProcess,
   getPackageName: getPackageName,
-  getPackageNamespace: getPackageNamespace,
+  getPackageScope: getPackageScope,
   getProjectConfigs: getProjectConfigs
 }
