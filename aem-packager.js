@@ -2,79 +2,69 @@
 const Console = console
 Console.log('Starting AEM Packager.')
 
-const { getNPM, prefixProperties } = require('./src/helpers.js')
-const path = require('path')
 const _ = require('lodash')
+const commandLineArgs = require('command-line-args')
+const mvn = require('maven')
+const path = require('path')
+const { getConfig } = require('read-config-file')
+const {
+  getCommands,
+  getConfigsFromProcess,
+  getProjectConfigs,
+  prefixProperties
+} = require('./src/helpers.js')
 
-// Define defaults when configs are not provided
+// Define default fallbacks for all unset configs
 const defaults = require('./src/defaults.json')
 
+// Merge configurations from various sources
+var configs = {}
+_.defaultsDeep(
+  configs,
+  getConfigsFromProcess(defaults),
+  {
+    defines: getProjectConfigs()
+  },
+  defaults
+)
+
 /**
- * Parses the settings to generate a paths object containing
- * the various paths used in AEM and the build process
- * @param {Object} - plugin options object
- * @returns {Object} - paths
+ * Resolves a path relative to the command being run
+ * @param {String} p - path to resolve
  */
-const getPaths = function (options) {
-  Console.debug('Processing Paths.')
-  return {
-    pom: path.resolve(__dirname, 'src/pom.xml'),
-    mvnTarget: path.resolve(process.cwd(), options.buildDir),
-    npmOut: path.resolve(process.cwd(), options.srcDir)
-  }
+const resolvePath = function (p) {
+  return path.resolve(process.cwd(), p)
 }
 
 /**
- * Gets a consolidated options object from the various sources
+ * Attempts to load configs from a specified file
+ * @param {String} configPath file to load
+ * @returns {Promise} loader
  */
-const getOptions = function () {
-  Console.debug('Processing Options.')
-  var options = {}
-  var pkgConfigOptions = {}
-  const optsList = Object.keys(defaults.options) // List of known options for aem-packager
-
-  // Standard options extracted from NPM package.json values
-  optsList.forEach(function (prop) {
-    pkgConfigOptions[prop] = getNPM(prop, 'npm_package_aem_packager_options_')
+const loadConfigs = async function (configPath) {
+  configPath = path.resolve(configPath)
+  return getConfig('', configPath).then((result) => {
+    Console.log(`Loaded configuration from ${configPath}`)
+    return result.result
+  }, (err) => {
+    Console.error(`Could not load the specified configuration file from ${configPath}`)
+    Console.error(err)
+    process.exit(1)
   })
-
-  _.defaults(
-    options,
-    pkgConfigOptions,
-    defaults.options // Default fallback options defined in this module
-  )
-
-  return options
-}
-
-/**
- * Prepares the list of Maven commands
- * @param {Ojbect} paths - Modules paths list
- * @param {Array} commands to run in Maven
- */
-const getCommands = function (paths) {
-  Console.debug('Processing Maven Commands.')
-  return [
-    '-f',
-    paths.pom,
-    'clean',
-    'install',
-    '-Pnpm' // Force a build profile that lets us set the Maven build target folder
-  ]
 }
 
 /**
  * Generates the default JCR path
- * @param {Object} defines - The consolidates list of Maven variables
+ * @param {Object} opts - Must contain 2 properties: groupId and artifactId
  * @returns {String} the JCR path where the package contents should be installed in AEM
  */
-const getDefaultJCRPath = function (defines) {
+const getDefaultJCRPath = function (opts) {
   Console.debug('Generating a default JCR installation path.')
   var segs = [
     '', // force leading slash
     'apps',
-    defines.groupId,
-    defines.artifactId,
+    opts.groupId,
+    opts.artifactId,
     'clientlibs'
   ]
   return segs.join('/')
@@ -82,65 +72,75 @@ const getDefaultJCRPath = function (defines) {
 
 /**
  * Gets a consolidated list of Maven defines from the various sources
- # @param {Object} paths - List of module paths
+ * @param {Object} configs - Plugin configurations
  */
-const getDefines = function (paths) {
+const getDefines = function (configs) {
   Console.debug('Processing list of Defines.')
   var defines = {}
-  var pkgDefines = {}
-  var pkgConfigDefines = {}
-  const stdProps = ['name', 'description', 'version'] // Standard properties available in any package.json
-  const definesList = Object.keys(defaults.defines) // List of known defines for aem-packager
-
-  // Standard properites extracted from NPM package.json values
-  stdProps.forEach(function (prop) {
-    pkgDefines[prop] = getNPM(prop)
-  })
-  pkgDefines.artifactId = getNPM('name')
-
-  // Get the list of defines NPM package.json
-  definesList.forEach(function (prop) {
-    pkgConfigDefines[prop] = getNPM(prop, 'npm_package_aem_packager_defines_')
-  })
-
   // Apply configurations from paths
   const pathOptions = {
-    dist: paths.npmOut,
-    buildTarget: paths.mvnTarget
+    srcDir: resolvePath(configs.options.srcDir),
+    buildDir: resolvePath(configs.options.buildDir)
   }
 
   _.defaults(
     defines,
     pathOptions,
-    pkgConfigDefines,
-    pkgDefines,
-    defaults.defines // Default fallback defined in this module
+    configs.defines
   )
 
   // Set a safe JCR install path if one was not determined
   defines.jcrPath = _.get(defines, 'jcrPath', getDefaultJCRPath(defines))
+  Console.debug(`Package contents will be installed to ${defines.jcrPath}`)
 
   return defines
 }
 
-// Get command line arguments
-// const [,, ...args] = process.argv
+/**
+ * Runs the Maven packaging steps
+ * @param {Object} configs Fully processed configuration object
+ */
+const runMvn = function (configs) {
+  const pomPath = path.resolve(__dirname, 'src/pom.xml')
+  const commands = getCommands(pomPath)
+  var defines = getDefines(configs)
+  // Prepare the variables for the pom.xml
+  defines = prefixProperties(defines, 'npm')
+  Console.log(`Running AEM Packager for ${defines.npmgroupId}.${defines.npmartifactId}`)
+  // Run maven to build a package
+  mvn.create({}).execute(commands, defines).then((result) => {
+    Console.log(`AEM package has been created and can be found in the current user's Maven package repository or in ./${configs.options.buildDir}`)
+  }).catch((result) => {
+    Console.error(result)
+    Console.error('Failed to compile Maven package. See Maven log for details.')
+    process.exit(1)
+  })
+}
 
-const mvn = require('maven').create({})
+/**
+ * Main entry function to run aem-packager
+ */
+const packageAEM = function () {
+  // Get command line arguments
+  const optionDefinitions = [
+    { name: 'config', alias: 'c', type: String, multiple: false, defaultOption: true }
+  ]
+  const args = commandLineArgs(optionDefinitions)
 
-const options = getOptions()
-const paths = getPaths(options)
-const commands = getCommands(paths)
-var defines = getDefines(paths)
-// Prepare the variables for the pom.xml
-defines = prefixProperties(defines, 'npm')
+  if (args.config) {
+    // Config file is specified so try to load it
+    loadConfigs(args.config).then((result) => {
+      // Merge with the other configs
+      _.defaultsDeep(
+        result,
+        configs
+      )
+      runMvn(result)
+    })
+  } else {
+    // No config file, use only package.json and defaults
+    runMvn(configs)
+  }
+}
 
-Console.log(`Running AEM Packager for ${defines.npmgroupId}.${defines.npmartifactId}`)
-
-// Run maven to build a package
-mvn.execute(commands, defines).then((result) => {
-  Console.log(`AEM package has been created and can be found in ${paths.mvnTarget}`)
-}).catch((result) => {
-  Console.error('Failed to compile Maven package. See Maven log for details.')
-  process.exit(1)
-})
+packageAEM()
