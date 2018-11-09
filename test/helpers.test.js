@@ -83,13 +83,13 @@ describe('getPackageScope()', () => {
   it('retrieves the scope used as a prefix on running NPM package name.', () => {
     const expected = 'test' + _getRandomString()
     const packageName = ['@', expected, '/', _getRandomString()].join('')
-    process.env.npm_package_name = packageName
+    _setEnv('npm_package_name', packageName)
     const actual = getPackageScope()
     expect(actual).to.equal(expected)
   })
   it('returns undefined when there is no scope in the running NPM package name.', () => {
     const packageName = 'test' + _getRandomString()
-    process.env.npm_package_name = packageName
+    _setEnv('npm_package_name', packageName)
     const actual = getPackageScope()
     expect(actual).to.be.an('undefined')
   })
