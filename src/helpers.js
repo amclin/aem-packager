@@ -68,20 +68,68 @@ const getFromEnv = function (searchPath) {
 }
 
 /**
+ * Parses the NPM package name from the running process
+ * @returns {Object} Package name and group. '@foo/bar' would result in:
+ *   { group: 'foo', name: 'bar' }
+ */
+const _parseProcessPackageName = function () {
+  var info = {}
+  var data = process.env.npm_package_name.split('/')
+  if (data.length > 1) {
+    // name and group are present
+    info.name = data[1]
+    info.group = data[0]
+    // trim leading @ from group
+    while (info.group.charAt(0) === '@') {
+      info.group = info.group.substr(1)
+    }
+  } else {
+    // Name only
+    info.name = data[0]
+  }
+
+  return info
+}
+
+/**
+ * Extracts the maven-safe package name from the running process
+ * example: Project named '@foo/bar' would return 'bar'
+ * @returns {String} Name of package without scope prefix
+ */
+const getPackageName = function () {
+  return _parseProcessPackageName().name
+}
+
+/**
+ * Extracts the group from the scoped NPM project title in the running process
+ * example: Project named '@foo/bar' would return 'foo'
+ * @returns {String} Extracted scoped without the leading @. Undefined if no match.
+ */
+const getPackageScope = function () {
+  return _parseProcessPackageName().group
+}
+
+/**
  * Retreives the config values that can be determined from any project's package.json
  */
 const getProjectConfigs = function () {
   var configs = {}
-  const stdProps = ['name', 'description', 'version'] // Standard properties available in any package.json
+  const stdProps = ['description', 'version'] // Standard properties available in any package.json
   stdProps.forEach((prop) => {
     configs[prop] = getFromEnv(['npm', 'package', prop])
   })
-  configs.artifactId = getFromEnv(['npm', 'package', 'name'])
+  configs.name = getPackageName()
+  configs.artifactId = configs.name
+  configs.groupId = getPackageScope()
 
   return configs
 }
 
-module.exports.prefixProperties = prefixProperties
-module.exports.getCommands = getCommands
-module.exports.getConfigsFromProcess = getConfigsFromProcess
-module.exports.getProjectConfigs = getProjectConfigs
+module.exports = {
+  prefixProperties,
+  getCommands,
+  getConfigsFromProcess,
+  getPackageName,
+  getPackageScope,
+  getProjectConfigs
+}
