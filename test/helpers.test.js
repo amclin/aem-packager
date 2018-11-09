@@ -10,8 +10,20 @@ const {
   prefixProperties
 } = require('../src/helpers.js')
 
+/**
+ * Generates a random alphanumeric string
+ */
 const _getRandomString = function () {
   return Math.random().toString(36).substring(2, 15)
+}
+
+/**
+ * Sets a global value in process.env
+ * @param {String} key property in process.env to set
+ * @param {Any} value value to popluate
+ */
+const _setEnv = function (key, value) {
+  process.env[key] = value
 }
 
 describe('getCommands()', () => {
@@ -54,14 +66,14 @@ describe('getConfigsFromProcess()', () => {
 describe('getPackageName()', () => {
   it('retrieves the name used of the package running NPM process.', () => {
     const expected = 'test' + _getRandomString()
-    process.env.npm_package_name = expected
+    _setEnv('npm_package_name', expected)
     const actual = getPackageName()
     expect(actual).to.equal(expected)
   })
   it('strips out the prefix for scoped packages', () => {
     const expected = 'test' + _getRandomString()
     const packageName = ['@', _getRandomString(), '/', expected].join('')
-    process.env.npm_package_name = packageName
+    _setEnv('npm_package_name', packageName)
     const actual = getPackageName()
     expect(actual).to.equal(expected)
   })

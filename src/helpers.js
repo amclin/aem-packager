@@ -126,10 +126,10 @@ const getProjectConfigs = function () {
 }
 
 module.exports = {
-  prefixProperties: prefixProperties,
-  getCommands: getCommands,
-  getConfigsFromProcess: getConfigsFromProcess,
-  getPackageName: getPackageName,
-  getPackageScope: getPackageScope,
-  getProjectConfigs: getProjectConfigs
+  prefixProperties,
+  getCommands,
+  getConfigsFromProcess,
+  getPackageName,
+  getPackageScope,
+  getProjectConfigs
 }
