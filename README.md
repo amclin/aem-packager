@@ -189,7 +189,11 @@ Human-readable description that will be used for the AEM content package. When n
 ```
 
 #### groupId
-Used within AEM's package management to group related packages together. The naming convention typically follows Java package naming so it is easy to find packages in the AEM package manager. Default value if unset will be `npm`. Must be a machine-safe string.
+Used within AEM's package management to group related packages together. The naming convention in AEM packages typically followsJava package naming so it is easy to find specific packages in the AEM package manager. This must be a machine-safe string.
+
+##### Scoped vs Non-Scoped packages
+*   If your [NPM package is scoped](https://docs.npmjs.com/getting-started/scoped-packages), then the default value of `groupId` will be the scope of your package. For example, for a package named `@foo/mypackage`, the default `groupId` will be `foo`
+*   If your NPM package is not scoped, then the default `groupId` will be the generic fallback `npm`. 
 
 ##### Example of groupId
 For a company called "Example.org":

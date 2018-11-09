@@ -3,13 +3,27 @@
 const expect = require('chai').expect
 const {
   getCommands,
-  getProjectConfigs,
   getConfigsFromProcess,
+  getProjectConfigs,
+  getPackageName,
+  getPackageScope,
   prefixProperties
 } = require('../src/helpers.js')
 
+/**
+ * Generates a random alphanumeric string
+ */
 const _getRandomString = function () {
   return Math.random().toString(36).substring(2, 15)
+}
+
+/**
+ * Sets a global value in process.env
+ * @param {String} key property in process.env to set
+ * @param {Any} value value to popluate
+ */
+const _setEnv = function (key, value) {
+  process.env[key] = value
 }
 
 describe('getCommands()', () => {
@@ -46,6 +60,38 @@ describe('getConfigsFromProcess()', () => {
     process.env[envKey] = expected
     const result = getConfigsFromProcess(testObj)
     expect(result[key][subkey]).to.equal(expected)
+  })
+})
+
+describe('getPackageName()', () => {
+  it('retrieves the name used of the package running NPM process.', () => {
+    const expected = 'test' + _getRandomString()
+    _setEnv('npm_package_name', expected)
+    const actual = getPackageName()
+    expect(actual).to.equal(expected)
+  })
+  it('strips out the prefix for scoped packages', () => {
+    const expected = 'test' + _getRandomString()
+    const packageName = ['@', _getRandomString(), '/', expected].join('')
+    _setEnv('npm_package_name', packageName)
+    const actual = getPackageName()
+    expect(actual).to.equal(expected)
+  })
+})
+
+describe('getPackageScope()', () => {
+  it('retrieves the scope used as a prefix on running NPM package name.', () => {
+    const expected = 'test' + _getRandomString()
+    const packageName = ['@', expected, '/', _getRandomString()].join('')
+    _setEnv('npm_package_name', packageName)
+    const actual = getPackageScope()
+    expect(actual).to.equal(expected)
+  })
+  it('returns undefined when there is no scope in the running NPM package name.', () => {
+    const packageName = 'test' + _getRandomString()
+    _setEnv('npm_package_name', packageName)
+    const actual = getPackageScope()
+    expect(actual).to.be.an('undefined')
   })
 })
 
