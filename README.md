@@ -212,4 +212,4 @@ Force the version number that will be used for the AEM content package. When not
 *   Need more help in getting this working? See [aem-packager-example](https://github.com/amclin/aem-packager-example) for an example end-to-end NodeJS project that produces an installable AEM package.
 *   Need to create AEM's clientlib folder structures and manifests? See [aem-clientlib-generator](https://www.npmjs.com/package/aem-clientlib-generator)
 
-[![NPM](https://nodei.co/npm/aem-packager.png)](https://nodei.co/npm/aem-packager/)
+[![NPM](https://nodei.co/npm/aem-packager.png)](https://nodei.co/npm/aem-packager/) [![Greenkeeper badge](https://badges.greenkeeper.io/amclin/aem-packager.svg)](https://greenkeeper.io/)
