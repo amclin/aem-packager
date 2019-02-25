@@ -80,7 +80,8 @@ const getDefines = function (configs) {
   // Apply configurations from paths
   const pathOptions = {
     srcDir: resolvePath(configs.options.srcDir),
-    buildDir: resolvePath(configs.options.buildDir)
+    buildDir: resolvePath(configs.options.buildDir),
+    jcrPath: resolvePath(configs.options.jcrPath),
   }
 
   _.defaults(
