@@ -12,7 +12,14 @@
     "packages",
     "clientlibs",
     "Adobe Experience Manager",
-    "cq5"
+    "cq5",
+    "jcr",
+    "vault",
+    "clientlib",
+    "clientlibs",
+    "sync",
+    "package",
+    "packager"
   ],
   "author": "Anthony McLin",
   "license": "MIT",
