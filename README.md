@@ -1,8 +1,10 @@
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Build Status](https://travis-ci.org/amclin/aem-packager.svg?branch=master)](https://travis-ci.org/amclin/aem-packager)
 [![npm version](https://badge.fury.io/js/aem-packager.svg)](https://badge.fury.io/js/aem-packager)
 [![Dependencies Status](https://david-dm.org/amclin/aem-packager/status.svg)](https://david-dm.org/amclin/aem-packager)
 [![devDependencies Status](https://david-dm.org/amclin/aem-packager/dev-status.svg)](https://david-dm.org/amclin/aem-packager?type=dev)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/537d95b7e8fa4e40a2534574a7b4bc26)](https://app.codacy.com/app/mailfrom/aem-packager?utm_source=github.com&utm_medium=referral&utm_content=amclin/aem-packager&utm_campaign=Badge_Grade_Dashboard)
+[![Greenkeeper badge](https://badges.greenkeeper.io/amclin/aem-packager.svg)](https://greenkeeper.io/)
 # aem-packager
 Creates AEM packages for NodeJS projects that can then be installed through the Adobe Experience Manager package manager. Combined with the [aem-clientlib-generator](https://www.npmjs.com/package/aem-clientlib-generator) this provides a rich end-to-end workflow for developing JS and CSS for injection into AEM as components, libraries, applications, or contents.
 
@@ -212,4 +214,4 @@ Force the version number that will be used for the AEM content package. When not
 *   Need more help in getting this working? See [aem-packager-example](https://github.com/amclin/aem-packager-example) for an example end-to-end NodeJS project that produces an installable AEM package.
 *   Need to create AEM's clientlib folder structures and manifests? See [aem-clientlib-generator](https://www.npmjs.com/package/aem-clientlib-generator)
 
-[![NPM](https://nodei.co/npm/aem-packager.png)](https://nodei.co/npm/aem-packager/) [![Greenkeeper badge](https://badges.greenkeeper.io/amclin/aem-packager.svg)](https://greenkeeper.io/)
+[![NPM](https://nodei.co/npm/aem-packager.png)](https://nodei.co/npm/aem-packager/)
