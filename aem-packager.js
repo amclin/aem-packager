@@ -16,6 +16,7 @@ const {
 
 // Define default fallbacks for all unset configs
 const defaults = require('./src/defaults.json')
+defaults.options.jcrPath = undefined // Set here so it exists when we loop later. Cannot be declared undefined in JSON
 
 // Merge configurations from various sources
 var configs = {}
@@ -80,7 +81,8 @@ const getDefines = function (configs) {
   // Apply configurations from paths
   const pathOptions = {
     srcDir: resolvePath(configs.options.srcDir),
-    buildDir: resolvePath(configs.options.buildDir)
+    buildDir: resolvePath(configs.options.buildDir),
+    jcrPath: configs.options.jcrPath // Doesn't use resolvePath() because this is not a filesystem path
   }
 
   _.defaults(
