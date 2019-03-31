@@ -58,7 +58,7 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
-    "command-line-args": "^5.0.2",
+    "command-line-args": "^5.1.1",
     "lodash": "^4.17.11",
     "maven": "^4.4.1",
     "read-config-file": "^3.2.0"
