@@ -61,7 +61,7 @@
     "command-line-args": "^5.0.2",
     "lodash": "^4.17.11",
     "maven": "^4.4.1",
-    "read-config-file": "^3.2.0"
+    "read-config-file": "^4.0.0"
   },
   "remarkConfig": {
     "plugins": [
