@@ -31,6 +31,16 @@ const getCommands = function (path) {
 }
 
 /**
+ * Gets a specific property from the NPM process.env
+ * dashes in search segments will be converted to underscore
+ * @param {Array} searchPath - Array defining the path to the property
+ */
+const getFromEnv = function (searchPath) {
+  var key = searchPath.join('_').replace('-', '_')
+  return process.env[key]
+}
+
+/**
  * Gets the project details from the NPM running process, and therefore from
  * the package.json of the calling project
  * @returns {Object} - Configuration options and defines from the running process
@@ -55,16 +65,6 @@ const getConfigsFromProcess = function (defaults) {
   })
 
   return result
-}
-
-/**
- * Gets a specific property from the NPM process.env
- * dashes in search segments will be converted to underscore
- * @param {Array} searchPath - Array defining the path to the property
- */
-const getFromEnv = function (searchPath) {
-  var key = searchPath.join('_').replace('-', '_')
-  return process.env[key]
 }
 
 /**
