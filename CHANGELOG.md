@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/amclin/aem-packager/compare/v1.0.4...v1.1.0) (2019-07-15)
+
+
+### Features
+
+* verify maven is available when installing ([4447b30](https://github.com/amclin/aem-packager/commit/4447b30))
+
 ## [1.0.4](https://github.com/amclin/aem-packager/compare/v1.0.3...v1.0.4) (2019-07-01)
 
 
