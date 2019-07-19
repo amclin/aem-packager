@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/amclin/aem-packager/compare/v1.1.0...v1.1.1) (2019-07-19)
+
+
+### Bug Fixes
+
+* **package:** update read-config-file to version 5.0.0 ([841a755](https://github.com/amclin/aem-packager/commit/841a755))
+
 # [1.1.0](https://github.com/amclin/aem-packager/compare/v1.0.4...v1.1.0) (2019-07-15)
 
 
