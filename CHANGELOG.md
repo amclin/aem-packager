@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/amclin/aem-packager/compare/v1.1.1...v1.1.2) (2019-11-22)
+
+
+### Bug Fixes
+
+* **deps:** auto-bump version numbers when dependencies update ([427003e](https://github.com/amclin/aem-packager/commit/427003e6160c610d47ef9bc56c7cc139dbc74b50))
+
 ## [1.1.1](https://github.com/amclin/aem-packager/compare/v1.1.0...v1.1.1) (2019-07-19)
 
 
