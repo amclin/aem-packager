@@ -9,8 +9,8 @@ update_configs:
       include_scope: true
     automerged_updates:
       - match:
-        dependency_type: "development"
-        update_type: "in-range"
+          dependency_type: "development"
+          update_type: "in_range"
       - match:
-        dependency_type: "production"
-        update_type: "in-range"
+          dependency_type: "production"
+          update_type: "in_range"
