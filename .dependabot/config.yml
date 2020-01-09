@@ -5,5 +5,12 @@ update_configs:
     update_schedule: "daily"
     commit_message:
       prefix: "fix"
-      prefix_development: "chore"
+      prefix_development: "refacator"
       include_scope: true
+    automerged_updates:
+      - match:
+        dependency_type: "development"
+        update_type: "in-range"
+      - match:
+        dependency_type: "production"
+        update_type: "in-range"
