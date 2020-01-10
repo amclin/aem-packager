@@ -43,9 +43,9 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^8.1.0",
     "@semantic-release/changelog": "^3.0.2",
-    "@semantic-release/git": "^7.0.8",
-    "@semantic-release/github": "^5.2.10",
-    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/git": "^8.0.0",
+    "@semantic-release/github": "^6.0.0",
+    "@semantic-release/npm": "^6.0.0",
     "chai": "^4.2.0",
     "eslint-config-standard": "^14.0.0",
     "husky": "^4.0.0",
@@ -55,7 +55,7 @@
     "remark-cli": "^7.0.0",
     "remark-lint": "^6.0.3",
     "remark-preset-lint-recommended": "^3.0.2",
-    "semantic-release": "^15.13.3",
+    "semantic-release": "^16.0.0",
     "standard": "^14.0.0"
   },
   "dependencies": {
