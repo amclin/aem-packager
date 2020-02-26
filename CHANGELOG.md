@@ -1,3 +1,13 @@
+## [1.1.2](https://github.com/amclin/aem-packager/compare/v1.1.1...v1.1.2) (2020-02-26)
+
+
+### Bug Fixes
+
+* **ci:** improve release versioning ([c6f5f67](https://github.com/amclin/aem-packager/commit/c6f5f67546f8c8d3b560eb6ce7e38e003c382717))
+* **deps:** [security] bump npm from 6.13.0 to 6.13.4 ([090745e](https://github.com/amclin/aem-packager/commit/090745ea12275d93bfd5bba2a2e6037ffd4b23a3))
+* **deps:** auto-bump version numbers when dependencies update ([427003e](https://github.com/amclin/aem-packager/commit/427003e6160c610d47ef9bc56c7cc139dbc74b50))
+* **deps:** bump read-config-file from 5.0.0 to 5.0.1 ([9d85306](https://github.com/amclin/aem-packager/commit/9d853062954b23e9959657ac48fb27d775f1bdb9))
+
 ## [1.1.2](https://github.com/amclin/aem-packager/compare/v1.1.1...v1.1.2) (2020-02-21)
 
 
