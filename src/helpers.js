@@ -1,5 +1,3 @@
-const _ = require('lodash')
-
 /**
  * Renames properties on an object by prepending a prefix to them. Mutates the original object.
  * @param {Object} - Object to modify
@@ -7,8 +5,8 @@ const _ = require('lodash')
  * @returns {Object} - Updated object with renamed properties
  **/
 const prefixProperties = function (obj, prefix) {
-  _.forEach(obj, function (val, prop) {
-    obj[prefix + prop] = val
+  Object.keys(obj).forEach((prop) => {
+    obj[prefix + prop] = obj[prop]
     delete obj[prop]
   })
 
@@ -49,9 +47,9 @@ const getConfigsFromProcess = function (defaults) {
   var result = {}
 
   // Walk the defaults object and map the names back to process.env names so we can find them
-  _.forEach(defaults, (val, config) => {
+  Object.keys(defaults).forEach( (config) => {
     result[config] = {}
-    _.forEach(defaults[config], (val, property) => {
+    Object.keys(defaults[config]).forEach( (property) => {
       const searchSegments = [
         'npm',
         'package', // namespace of where package.json options are stored
