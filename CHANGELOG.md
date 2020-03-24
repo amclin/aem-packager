@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/amclin/aem-packager/compare/v1.1.3...v1.2.0) (2020-03-24)
+
+
+### Bug Fixes
+
+* **deps:** resolve dependency changes in package.json ([8500be4](https://github.com/amclin/aem-packager/commit/8500be4f8048d3a16714b6fcc01b3407d6474851))
+
+
+### Features
+
+* **deps:** remove lodash dependency ([3775405](https://github.com/amclin/aem-packager/commit/3775405620d4f22531e6d4b78810c76ec01092bb))
+
 ## [1.1.3](https://github.com/amclin/aem-packager/compare/v1.1.2...v1.1.3) (2020-03-24)
 
 
