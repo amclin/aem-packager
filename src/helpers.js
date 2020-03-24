@@ -47,9 +47,9 @@ const getConfigsFromProcess = function (defaults) {
   var result = {}
 
   // Walk the defaults object and map the names back to process.env names so we can find them
-  Object.keys(defaults).forEach( (config) => {
+  Object.keys(defaults).forEach((config) => {
     result[config] = {}
-    Object.keys(defaults[config]).forEach( (property) => {
+    Object.keys(defaults[config]).forEach((property) => {
       const searchSegments = [
         'npm',
         'package', // namespace of where package.json options are stored
