@@ -61,7 +61,7 @@
   "dependencies": {
     "command-line-args": "^5.1.1",
     "maven": "^4.4.1",
-    "read-config-file": "^5.0.0"
+    "read-config-file": "^6.0.0"
   },
   "remarkConfig": {
     "plugins": [
