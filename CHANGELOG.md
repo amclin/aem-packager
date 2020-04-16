@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/amclin/aem-packager/compare/v1.2.1...v1.2.2) (2020-04-16)
+
+
+### Bug Fixes
+
+* **deps-dev:** [security] bump minimist and semantic-release ([63db0cc](https://github.com/amclin/aem-packager/commit/63db0cc80c8bf4725937e8ef39d15efd7ae6f983))
+
 ## [1.2.1](https://github.com/amclin/aem-packager/compare/v1.2.0...v1.2.1) (2020-04-01)
 
 
