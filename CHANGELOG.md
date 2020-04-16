@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/amclin/aem-packager/compare/v1.2.2...v1.2.3) (2020-04-16)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump minimist from 1.2.0 to 1.2.5 ([15c5974](https://github.com/amclin/aem-packager/commit/15c597410117135730e73a1f74e2109141ca0300))
+
 ## [1.2.2](https://github.com/amclin/aem-packager/compare/v1.2.1...v1.2.2) (2020-04-16)
 
 
