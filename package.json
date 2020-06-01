@@ -23,6 +23,9 @@
   ],
   "author": "Anthony McLin",
   "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "bugs": {
     "url": "https://github.com/amclin/aem-packager/issues"
   },
@@ -60,7 +63,7 @@
   },
   "dependencies": {
     "command-line-args": "^5.1.1",
-    "maven": "^4.4.1",
+    "maven": "^5.0.0",
     "read-config-file": "^6.0.0"
   },
   "remarkConfig": {
