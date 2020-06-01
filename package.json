@@ -1,6 +1,6 @@
 {
   "name": "aem-packager",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "A node plugin to package files into a bundle installable through the AEM package manager.",
   "main": "aem-packager.js",
   "repository": {

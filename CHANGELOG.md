@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/amclin/aem-packager/compare/v1.2.3...v1.3.0) (2020-06-01)
+
+
+### Bug Fixes
+
+* **deps:** bump maven from 4.7.0 to 5.0.0 ([ada25d3](https://github.com/amclin/aem-packager/commit/ada25d3cc0c349cea447d0d3f353dc3dcb29b38a))
+
+
+### Features
+
+* **deps:** enforce minimum Node v12 ([1273dac](https://github.com/amclin/aem-packager/commit/1273dac8ad76487bf0c82f43249a9ec26bde491d)), closes [#222](https://github.com/amclin/aem-packager/issues/222)
+
 ## [1.2.3](https://github.com/amclin/aem-packager/compare/v1.2.2...v1.2.3) (2020-04-16)
 
 
