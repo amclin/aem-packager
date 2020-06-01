@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/amclin/aem-packager/compare/v1.3.0...v2.0.0) (2020-06-01)
+
+
+### Features
+
+* version bump for breaking change ([0b11cb8](https://github.com/amclin/aem-packager/commit/0b11cb83ad4309740941959512fcd4ca3106340f))
+
+
+### BREAKING CHANGES
+
+* now requires Node v12
+
 # [1.3.0](https://github.com/amclin/aem-packager/compare/v1.2.3...v1.3.0) (2020-06-01)
 
 
