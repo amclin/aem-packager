@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/amclin/aem-packager/compare/v2.0.0...v2.0.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump npm-registry-fetch from 4.0.3 to 4.0.5 ([35b29a6](https://github.com/amclin/aem-packager/commit/35b29a6d09f1a785d48d234a322d52ccd9dde7a7))
+
 # [2.0.0](https://github.com/amclin/aem-packager/compare/v1.3.0...v2.0.0) (2020-06-01)
 
 
