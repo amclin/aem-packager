@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/amclin/aem-packager/compare/v2.0.1...v2.0.2) (2020-10-17)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump npm-user-validate from 1.0.0 to 1.0.1 ([21014ec](https://github.com/amclin/aem-packager/commit/21014ecaddd2ecbf28b3939d45031f51bb62a65a))
+
 ## [2.0.1](https://github.com/amclin/aem-packager/compare/v2.0.0...v2.0.1) (2020-07-07)
 
 
