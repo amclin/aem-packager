@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/amclin/aem-packager/compare/v2.0.3...v2.0.4) (2020-12-10)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump ini from 1.3.5 to 1.3.7 ([3420d61](https://github.com/amclin/aem-packager/commit/3420d618a1f3c8ba29b1ff7ac7a36fb7a296c36a))
+
 ## [2.0.3](https://github.com/amclin/aem-packager/compare/v2.0.2...v2.0.3) (2020-11-18)
 
 
