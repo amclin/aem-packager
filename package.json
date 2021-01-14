@@ -59,7 +59,7 @@
     "remark-lint": "^8.0.0",
     "remark-preset-lint-recommended": "^5.0.0",
     "semantic-release": "^17.0.2",
-    "standard": "^14.0.0"
+    "standard": "^16.0.3"
   },
   "dependencies": {
     "command-line-args": "^5.1.1",
