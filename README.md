@@ -2,8 +2,8 @@
 [![Dependabot Status](https://badgen.net/dependabot/amclin/aem-packager/?icon=dependabot)](https://dependabot.com)
 ![Unit Tests](https://github.com/amclin/aem-packager/workflows/Run%20Tests/badge.svg)![Run Tests](https://github.com/amclin/aem-packager/workflows/Run%20Tests/badge.svg)
 [![npm version](https://badge.fury.io/js/aem-packager.svg)](https://badge.fury.io/js/aem-packager)
-[![Dependencies Status](https://david-dm.org/amclin/aem-packager/status.svg)](https://david-dm.org/amclin/aem-packager)
-[![devDependencies Status](https://david-dm.org/amclin/aem-packager/dev-status.svg)](https://david-dm.org/amclin/aem-packager?type=dev)
+[![Dependencies Status](https://david-dm.org/amclin/aem-packager.svg)](https://david-dm.org/amclin/aem-packager)
+[![devDependencies Status](https://david-dm.org/amclin/aem-packager.svg?type=dev)](https://david-dm.org/amclin/aem-packager?type=dev)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/537d95b7e8fa4e40a2534574a7b4bc26)](https://app.codacy.com/app/mailfrom/aem-packager?utm_source=github.com&utm_medium=referral&utm_content=amclin/aem-packager&utm_campaign=Badge_Grade_Dashboard)
 [![codebeat badge](https://codebeat.co/badges/106d7699-204f-40da-ab0a-4f59ee5ec064)](https://codebeat.co/projects/github-com-amclin-aem-packager-master)
 # aem-packager
