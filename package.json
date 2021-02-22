@@ -35,6 +35,7 @@
   },
   "scripts": {
     "preinstall": "mvn -v",
+    "postinstall": "husky install",
     "pretest": "npm run lint",
     "test": "nyc mocha",
     "lint": "run-p lint:*",
@@ -70,13 +71,6 @@
     "plugins": [
       "remark-preset-lint-recommended"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm test",
-      "pre-push": "npm test"
-    }
   },
   "commitlint": {
     "extends": [
