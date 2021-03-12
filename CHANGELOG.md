@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/amclin/aem-packager/compare/v2.0.4...v2.0.5) (2021-03-12)
+
+
+### Bug Fixes
+
+* **deps:** adopt Husky 5 syntax for automating checks ([57fcedd](https://github.com/amclin/aem-packager/commit/57fcedda0f5146fb9feeea8db2a4c6f822c138ce))
+
 ## [2.0.4](https://github.com/amclin/aem-packager/compare/v2.0.3...v2.0.4) (2020-12-10)
 
 
