@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/amclin/aem-packager/compare/v2.0.5...v2.0.6) (2021-03-12)
+
+
+### Bug Fixes
+
+* husky was preventing  package from being installable ([b15f019](https://github.com/amclin/aem-packager/commit/b15f0191a4732aba7c0a238596d690e0376edb19))
+
 ## [2.0.5](https://github.com/amclin/aem-packager/compare/v2.0.4...v2.0.5) (2021-03-12)
 
 
