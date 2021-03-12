@@ -1,1 +1,4 @@
+# Disable Husky hooks on CI environments
+[ -n "$CI" ] && exit 0
+
 npm test
