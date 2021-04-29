@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@commitlint/config-angular"
+    versions:
+    - 12.0.0
+  - dependency-name: "@commitlint/cli"
+    versions:
+    - 12.0.0
+  - dependency-name: husky
+    versions:
+    - 5.0.9
+  commit-message:
+    prefix: fix
+    prefix-development: refactor
+    include: scope
