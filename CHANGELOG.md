@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/amclin/aem-packager/compare/v2.0.8...v2.0.9) (2021-05-06)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump lodash from 4.17.19 to 4.17.21 ([a015813](https://github.com/amclin/aem-packager/commit/a0158139a7a1622629e84aa4bd85a1a450d63ab5))
+
 ## [2.0.8](https://github.com/amclin/aem-packager/compare/v2.0.7...v2.0.8) (2021-03-29)
 
 
