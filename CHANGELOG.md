@@ -1,3 +1,10 @@
+## [2.0.10](https://github.com/amclin/aem-packager/compare/v2.0.9...v2.0.10) (2021-05-07)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump hosted-git-info from 2.7.1 to 2.8.9 ([50fb816](https://github.com/amclin/aem-packager/commit/50fb81610844162999deaadfcae7259bbd80c60f))
+
 ## [2.0.9](https://github.com/amclin/aem-packager/compare/v2.0.8...v2.0.9) (2021-05-06)
 
 
