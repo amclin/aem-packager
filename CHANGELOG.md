@@ -1,3 +1,11 @@
+## [2.0.12](https://github.com/amclin/aem-packager/compare/v2.0.11...v2.0.12) (2021-06-08)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump glob-parent from 5.1.0 to 5.1.2 ([81e0bfa](https://github.com/amclin/aem-packager/commit/81e0bfafa195e44260f5ddd8c8ecafde6d89dbac))
+* **deps:** [security] bump trim-newlines from 3.0.0 to 3.0.1 ([a4aec8f](https://github.com/amclin/aem-packager/commit/a4aec8faae12b880536f27b3ad4e68653b16a78c))
+
 ## [2.0.11](https://github.com/amclin/aem-packager/compare/v2.0.10...v2.0.11) (2021-05-11)
 
 
