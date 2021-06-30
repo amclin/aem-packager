@@ -1,0 +1,27 @@
+name: Automerge
+
+on:
+  check_suite:
+    types:
+      - completed
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Automerge Dev Dependency Updates
+        uses: ridedott/merge-me-action@v2
+        if: |
+          github.actor == 'dependabot[bot]' &&
+          github.event_name == 'pull_request' &&
+          startsWith(github.event.pull_request.title, 'refactor(deps-dev):')
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Automerge Dependency Updates
+        uses: ridedott/merge-me-action@v2
+        if: |
+          github.actor == 'dependabot[bot]' &&
+          github.event_name == 'pull_request' &&
+          startsWith(github.event.pull_request.title, 'fix(deps):')
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
