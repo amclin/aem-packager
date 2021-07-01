@@ -1,3 +1,10 @@
+## [2.0.13](https://github.com/amclin/aem-packager/compare/v2.0.12...v2.0.13) (2021-07-01)
+
+
+### Bug Fixes
+
+* maven failing to resolve Adobe vault plugin ([6611718](https://github.com/amclin/aem-packager/commit/66117180ae65e25ef4e077976adef82c7b74d865))
+
 ## [2.0.12](https://github.com/amclin/aem-packager/compare/v2.0.11...v2.0.12) (2021-06-08)
 
 
