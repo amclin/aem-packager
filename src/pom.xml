@@ -22,8 +22,8 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>adobe-public-releases</id>
-			<name>Adobe Basel Public Repository</name>
-			<url>http://repo.adobe.com/nexus/content/groups/public</url>
+			<name>Adobe Public Repository</name>
+			<url>https://repo.adobe.com/nexus/content/groups/public</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
