@@ -1,3 +1,10 @@
+## [2.0.14](https://github.com/amclin/aem-packager/compare/v2.0.13...v2.0.14) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** bump command-line-args from 5.1.1 to 5.1.3 ([eb1edf4](https://github.com/amclin/aem-packager/commit/eb1edf47297b4bf671cb3ea176570d4fe44c3c10))
+
 ## [2.0.13](https://github.com/amclin/aem-packager/compare/v2.0.12...v2.0.13) (2021-07-01)
 
 
