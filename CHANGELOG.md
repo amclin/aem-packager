@@ -1,3 +1,10 @@
+## [2.0.16](https://github.com/amclin/aem-packager/compare/v2.0.15...v2.0.16) (2021-10-13)
+
+
+### Bug Fixes
+
+* **deps:** bump path-parse from 1.0.6 to 1.0.7 ([fe35624](https://github.com/amclin/aem-packager/commit/fe3562449a63be2cb01616dd7ccf19101c9a86c7))
+
 ## [2.0.15](https://github.com/amclin/aem-packager/compare/v2.0.14...v2.0.15) (2021-10-13)
 
 ### Bug Fixes
