@@ -48,7 +48,7 @@
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^10.0.0",
     "@semantic-release/github": "^8.0.1",
-    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/npm": "^8.0.0",
     "chai": "^4.2.0",
     "eslint-config-standard": "^16.0.2",
     "husky": "^7.0.0",
