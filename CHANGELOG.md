@@ -1,3 +1,10 @@
+## [2.0.17](https://github.com/amclin/aem-packager/compare/v2.0.16...v2.0.17) (2022-05-06)
+
+
+### Bug Fixes
+
+* **deps:** bump command-line-args from 5.2.0 to 5.2.1 ([90cd173](https://github.com/amclin/aem-packager/commit/90cd173194e5a59e5445f1b3ab351addd4aabe76))
+
 ## [2.0.16](https://github.com/amclin/aem-packager/compare/v2.0.15...v2.0.16) (2021-10-13)
 
 
