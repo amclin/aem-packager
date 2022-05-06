@@ -1,3 +1,11 @@
+## [2.0.18](https://github.com/amclin/aem-packager/compare/v2.0.17...v2.0.18) (2022-05-06)
+
+
+### Bug Fixes
+
+* **deps:** bump minimist from 1.2.5 to 1.2.6 ([27910f2](https://github.com/amclin/aem-packager/commit/27910f2e300dd8fbd927fad6924c6d90391bf8d7))
+* **deps:** bump node-fetch from 2.6.6 to 2.6.7 ([b9705fa](https://github.com/amclin/aem-packager/commit/b9705fab0ba1d024e4ec49fc147420e180915fd6))
+
 ## [2.0.17](https://github.com/amclin/aem-packager/compare/v2.0.16...v2.0.17) (2022-05-06)
 
 
