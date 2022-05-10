@@ -59,7 +59,7 @@
     "remark-cli": "^10.0.0",
     "remark-lint": "^9.1.0",
     "remark-preset-lint-recommended": "^6.1.1",
-    "standard": "^16.0.3"
+    "standard": "^17.0.0"
   },
   "dependencies": {
     "command-line-args": "^5.1.1",
