@@ -43,7 +43,7 @@
     "lint:js": "standard"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.0.1",
+    "@commitlint/cli": "^17.0.0",
     "@commitlint/config-angular": "^17.0.0",
     "@semantic-release/changelog": "^6.0.0",
     "@semantic-release/git": "^10.0.0",
