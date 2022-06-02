@@ -1,3 +1,10 @@
+## [2.0.19](https://github.com/amclin/aem-packager/compare/v2.0.18...v2.0.19) (2022-06-02)
+
+
+### Bug Fixes
+
+* **deps:** bump npm from 8.8.0 to 8.11.0 ([d745e7b](https://github.com/amclin/aem-packager/commit/d745e7bab6ac7dc8331e8e2a08cd29b4a82c24ad))
+
 ## [2.0.18](https://github.com/amclin/aem-packager/compare/v2.0.17...v2.0.18) (2022-05-06)
 
 
