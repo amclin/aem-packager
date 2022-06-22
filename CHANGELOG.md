@@ -1,3 +1,10 @@
+## [2.0.20](https://github.com/amclin/aem-packager/compare/v2.0.19...v2.0.20) (2022-06-22)
+
+
+### Bug Fixes
+
+* **deps:** bump shell-quote from 1.6.1 to 1.7.3 ([cbc3cde](https://github.com/amclin/aem-packager/commit/cbc3cdee6adc317ff7adc4bc9d26fb1b5c6294a5))
+
 ## [2.0.19](https://github.com/amclin/aem-packager/compare/v2.0.18...v2.0.19) (2022-06-02)
 
 
