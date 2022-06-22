@@ -1,3 +1,10 @@
+## [2.0.21](https://github.com/amclin/aem-packager/compare/v2.0.20...v2.0.21) (2022-06-22)
+
+
+### Bug Fixes
+
+* **deps:** bump ansi-regex from 5.0.0 to 5.0.1 ([e809384](https://github.com/amclin/aem-packager/commit/e809384c342073dc21668dd636ae0b1b895e2c4a))
+
 ## [2.0.20](https://github.com/amclin/aem-packager/compare/v2.0.19...v2.0.20) (2022-06-22)
 
 
