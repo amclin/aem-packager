@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: lts/*
       - run: npm ci
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
