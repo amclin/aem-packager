@@ -1,3 +1,25 @@
+# [3.0.0](https://github.com/amclin/aem-packager/compare/v2.0.21...v3.0.0) (2022-07-07)
+
+
+### Continuous Integration
+
+* specify node versions by keyword ([ad10b13](https://github.com/amclin/aem-packager/commit/ad10b13cd2e60ac2d01c96ca478093e382667559))
+
+
+### Features
+
+* bump minimum Node from v12 to v14 ([e67c5e5](https://github.com/amclin/aem-packager/commit/e67c5e5edeb59c2bcbadb8a0dc09ce558a88cdc5))
+
+
+### BREAKING CHANGES
+
+* drop support for Node v12
+
+No explicit functional changes or library dependencies
+currently need v14, so technically it may still work on v12,
+but is unsupported and no longer tested.
+* drop support for Node 12
+
 ## [2.0.21](https://github.com/amclin/aem-packager/compare/v2.0.20...v2.0.21) (2022-06-22)
 
 
