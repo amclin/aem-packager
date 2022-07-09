@@ -9,7 +9,7 @@ const path = require('path')
 const { getConfig } = require('read-config-file')
 const {
   getCommands,
-  getConfigsFromProcess,
+  getConfigsFromPackage,
   getProjectConfigs,
   prefixProperties
 } = require('./src/helpers.js')
@@ -19,10 +19,10 @@ const defaults = require('./src/defaults.json')
 defaults.options.jcrPath = undefined // Set here so it exists when we loop later. Cannot be declared undefined in JSON
 
 // Merge configurations from various sources
-var configs = {}
+const configs = {}
 _.defaultsDeep(
   configs,
-  getConfigsFromProcess(defaults),
+  getConfigsFromPackage,
   {
     defines: getProjectConfigs()
   },
@@ -61,7 +61,7 @@ const loadConfigs = async function (configPath) {
  */
 const getDefaultJCRPath = function (opts) {
   Console.debug('Generating a default JCR installation path.')
-  var segs = [
+  const segs = [
     '', // force leading slash
     'apps',
     opts.groupId,
@@ -77,7 +77,7 @@ const getDefaultJCRPath = function (opts) {
  */
 const getDefines = function (configs) {
   Console.debug('Processing list of Defines.')
-  var defines = {}
+  const defines = {}
   // Apply configurations from paths
   const pathOptions = {
     srcDir: resolvePath(configs.options.srcDir),
@@ -105,7 +105,7 @@ const getDefines = function (configs) {
 const runMvn = function (configs) {
   const pomPath = path.resolve(__dirname, 'src/pom.xml')
   const commands = getCommands(pomPath)
-  var defines = getDefines(configs)
+  let defines = getDefines(configs)
   // Prepare the variables for the pom.xml
   defines = prefixProperties(defines, 'npm')
   Console.log(`Running AEM Packager for ${defines.npmgroupId}.${defines.npmartifactId}`)
