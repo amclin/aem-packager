@@ -1,3 +1,14 @@
+const path = require('path')
+const fs = require('fs')
+
+const _packagePath = (process.env.npm_package_json)
+  ? path.resolve(process.env.npm_package_json) // NPM 7 and later
+  : path.resolve(process.cwd(), 'package.json') // NPM 6 and earlier
+
+const _packageContents = JSON.parse(
+  fs.readFileSync(_packagePath, 'utf8')
+)
+
 /**
  * Renames properties on an object by prepending a prefix to them. Mutates the original object.
  * @param {Object} - Object to modify
@@ -28,41 +39,8 @@ const getCommands = function (path) {
   ]
 }
 
-/**
- * Gets a specific property from the NPM process.env
- * dashes in search segments will be converted to underscore
- * @param {Array} searchPath - Array defining the path to the property
- */
-const getFromEnv = function (searchPath) {
-  var key = searchPath.join('_').replace('-', '_')
-  return process.env[key]
-}
-
-/**
- * Gets the project details from the NPM running process, and therefore from
- * the package.json of the calling project
- * @returns {Object} - Configuration options and defines from the running process
- */
-const getConfigsFromProcess = function (defaults) {
-  var result = {}
-
-  // Walk the defaults object and map the names back to process.env names so we can find them
-  Object.keys(defaults).forEach((config) => {
-    result[config] = {}
-    Object.keys(defaults[config]).forEach((property) => {
-      const searchSegments = [
-        'npm',
-        'package', // namespace of where package.json options are stored
-        'aem-packager', // namespace of this plugin
-        config,
-        property
-      ]
-      // get the value
-      result[config][property] = getFromEnv(searchSegments)
-    })
-  })
-
-  return result
+const getConfigsFromPackage = function () {
+  return _packageContents['aem-packager']
 }
 
 /**
@@ -71,8 +49,8 @@ const getConfigsFromProcess = function (defaults) {
  *   { group: 'foo', name: 'bar' }
  */
 const _parseProcessPackageName = function () {
-  var info = {}
-  var data = process.env.npm_package_name.split('/')
+  const info = {}
+  const data = _packageContents.name.split('/')
   if (data.length > 1) {
     // name and group are present
     info.name = data[1]
@@ -111,22 +89,19 @@ const getPackageScope = function () {
  * Retreives the config values that can be determined from any project's package.json
  */
 const getProjectConfigs = function () {
-  var configs = {}
-  const stdProps = ['description', 'version'] // Standard properties available in any package.json
-  stdProps.forEach((prop) => {
-    configs[prop] = getFromEnv(['npm', 'package', prop])
-  })
-  configs.name = getPackageName()
-  configs.artifactId = configs.name
-  configs.groupId = getPackageScope()
-
-  return configs
+  return {
+    name: getPackageName(),
+    artifactId: getPackageName(),
+    groupId: getPackageScope(),
+    version: _packageContents.version,
+    description: _packageContents.description
+  }
 }
 
 module.exports = {
   prefixProperties,
   getCommands,
-  getConfigsFromProcess,
+  getConfigsFromPackage,
   getPackageName,
   getPackageScope,
   getProjectConfigs
