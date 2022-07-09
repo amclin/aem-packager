@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/amclin/aem-packager/compare/v3.0.0...v3.1.0) (2022-07-09)
+
+
+### Features
+
+* support for NPM v7 and later ([688a958](https://github.com/amclin/aem-packager/commit/688a958d1c0b34e13a981cf121e1a54b06f41455)), closes [#395](https://github.com/amclin/aem-packager/issues/395)
+
 # [3.0.0](https://github.com/amclin/aem-packager/compare/v2.0.21...v3.0.0) (2022-07-07)
 
 
