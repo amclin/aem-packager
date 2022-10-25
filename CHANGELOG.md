@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/amclin/aem-packager/compare/v3.1.1...v3.1.2) (2022-10-25)
+
+
+### Bug Fixes
+
+* **deps:** bump read-config-file from 6.2.0 to 6.3.2 ([869ea07](https://github.com/amclin/aem-packager/commit/869ea070be3ccea1eb9d66ff18987a26c182b4dd))
+
 ## [3.1.1](https://github.com/amclin/aem-packager/compare/v3.1.0...v3.1.1) (2022-10-25)
 
 
