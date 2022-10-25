@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/amclin/aem-packager/compare/v3.1.0...v3.1.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* **deps:** bump yargs-parser and yargs ([7d98d22](https://github.com/amclin/aem-packager/commit/7d98d22412743c12ed1391307274eecfafac4a18))
+
 # [3.1.0](https://github.com/amclin/aem-packager/compare/v3.0.0...v3.1.0) (2022-07-09)
 
 
