@@ -1,3 +1,10 @@
+## [3.1.3](https://github.com/amclin/aem-packager/compare/v3.1.2...v3.1.3) (2023-01-03)
+
+
+### Bug Fixes
+
+* **deps:** bump json5 from 1.0.1 to 1.0.2 ([0377874](https://github.com/amclin/aem-packager/commit/0377874326c19962c9a7de87ee72cf715ae4f684))
+
 ## [3.1.2](https://github.com/amclin/aem-packager/compare/v3.1.1...v3.1.2) (2022-10-25)
 
 
