@@ -1,3 +1,10 @@
+## [3.1.4](https://github.com/amclin/aem-packager/compare/v3.1.3...v3.1.4) (2023-10-07)
+
+
+### Bug Fixes
+
+* **deps:** bump yaml, cosmiconfig and semantic-release ([952eb2f](https://github.com/amclin/aem-packager/commit/952eb2fa35fb3f8041961353f133e339af7b3b01))
+
 ## [3.1.3](https://github.com/amclin/aem-packager/compare/v3.1.2...v3.1.3) (2023-01-03)
 
 
