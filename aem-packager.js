@@ -22,7 +22,7 @@ defaults.options.jcrPath = undefined // Set here so it exists when we loop later
 const configs = {}
 _.defaultsDeep(
   configs,
-  getConfigsFromPackage,
+  getConfigsFromPackage(),
   {
     defines: getProjectConfigs()
   },
