@@ -1,3 +1,11 @@
+## [3.1.5](https://github.com/amclin/aem-packager/compare/v3.1.4...v3.1.5) (2023-10-07)
+
+
+### Bug Fixes
+
+* config merge fix ([e31e2a1](https://github.com/amclin/aem-packager/commit/e31e2a1d6ee5e2b8a893c1f4efc01d455ab956fa)), closes [#486](https://github.com/amclin/aem-packager/issues/486)
+* configs were not loading from package.json ([00b5501](https://github.com/amclin/aem-packager/commit/00b55013725d2b911a47a8c3ef6267fa8a10b3b1))
+
 ## [3.1.4](https://github.com/amclin/aem-packager/compare/v3.1.3...v3.1.4) (2023-10-07)
 
 
