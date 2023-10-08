@@ -3,7 +3,7 @@
     "srcDir": "dist",
     "buildDir": "target",
     "packager": "jackrabbit",
-    "legacyCRXSupport": false
+    "crxCompatibility": false
   },
   "defines": {
     "name": "My Project",

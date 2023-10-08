@@ -14,7 +14,7 @@ const loadTemplate = (template) => {
   return xmlDoc
 }
 
-const assemblePom = ({ mode = 'jackrabbit', legacyCRXSupport = false }) => {
+const assemblePom = ({ packager: mode = 'jackrabbit', crxCompatibility: legacyCRXSupport = false }) => {
   try {
     Console.debug(`Asembling a pom.xml that will use ${mode}`)
 
