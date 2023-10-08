@@ -188,7 +188,7 @@ While Adobe [provides documentation](https://experienceleague.adobe.com/docs/exp
 
 Choose this option if youChoosing this option is consistent with how `aem-packager` worked previous to v4.0
 
-#### crxCompatibility
+#### legacyCRXSupport
 
 Enables backwards compatibility for CRX when using Jackrabbit for `packager`. Set boolean `true` or `false`. Defaults to `false`. When enabled, it includes the JCR Vault `content-package-maven-plugin` so that built packages have the necessary goals needed for CRX deployment. Has no effect if `packager` is set to `jcrvault`.
 
