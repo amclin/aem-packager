@@ -16,6 +16,7 @@ const {
 
 // Define default fallbacks for all unset configs
 const defaults = require('./src/defaults.json')
+const { assemblePom, writePom } = require('./src/template.js')
 defaults.options.jcrPath = undefined // Set here so it exists when we loop later. Cannot be declared undefined in JSON
 
 // Merge configurations from various sources
@@ -103,7 +104,13 @@ const getDefines = function (configs) {
  * @param {Object} configs Fully processed configuration object
  */
 const runMvn = function (configs) {
-  const pomPath = path.resolve(__dirname, 'src/pom.xml')
+  writePom(
+    assemblePom({
+      ...configs.options
+    })
+  )
+
+  const pomPath = path.resolve(__dirname, 'src', 'pom.xml')
   const commands = getCommands(pomPath)
   let defines = getDefines(configs)
   // Prepare the variables for the pom.xml

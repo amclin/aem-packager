@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+# Files generated dynamically when this plugin is run
+target/
+src/pom.xml
