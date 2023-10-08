@@ -1,0 +1,6 @@
+<plugin>
+    <!-- this plugin is only needed for crx package manager deployment -->
+    <groupId>com.day.jcr.vault</groupId>
+    <artifactId>content-package-maven-plugin</artifactId>
+    <version>1.0.4</version>
+</plugin>

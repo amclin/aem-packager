@@ -1,7 +1,9 @@
 {
   "options": {
     "srcDir": "dist",
-    "buildDir": "target"
+    "buildDir": "target",
+    "packager": "jackrabbit",
+    "legacyCRXSupport": false
   },
   "defines": {
     "name": "My Project",

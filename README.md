@@ -150,7 +150,9 @@ The settings for running the packager are populated through the `options` object
     "options": {
         "srcDir": "dist",
         "buildDir": "target"
-        "jcrPath": "/apps/mygroup/myapp/clientlibs"
+        "jcrPath": "/apps/mygroup/myapp/clientlibs",
+        "packager": "jackrabbit",
+        "legacyCRXSupport": false
     },
     "defines": {...}
 }
@@ -167,6 +169,29 @@ The working directory that Maven will use for compiling the build package. Defau
 #### jcrPath (string)
 
 The path in the JCR (AEM's storage system) where the module will be installed. Since most npm projects will likely be generating JS, CSS, and HTML assets, the default here when left blank, this will use the [`groupId`](#groupId) and [`artifactId`](#artifactId) to complete generate the full pattern `/apps/<groupId>/<artifactId>/clientlibs`
+
+#### packager (string)
+
+Switches which plugin to use for building the content package. Defaults to `jackrabbit` when not provided:
+-   `jackrabbit`: Will use the more modern [jackrabbit plugin](#jackrabbit-plugin)
+-   `jcrvault`: Will use the legacy [jcr vault](#jcr-vault-plugin)
+
+These two plugins work slightly differently.
+
+##### Jackrabbit Plugin
+
+The `filevault-package-maven-plugin` from [Apache Jackrabbit](https://jackrabbit.apache.org/filevault-package-maven-plugin/) is faster during package installation because it doesn't need to copy files. However, it doesn't have full backwards compatibility and does not support CRX deployment. It will not work with AEM 6.3 or earlier. If using `jackrabbit` with AEM 6.3, make sure also turn on `legacyCRXSupport` so that the JCR Vault plugin can also be included.
+
+##### JCR Vault Plugin
+
+While Adobe [provides documentation](https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/implementing/developer-tools/maven-plugin.html) on using the JCR Vault plugin, it is no longer maintained. There were significant compatibility issues between AEM 6.1 and 6.3. In addition, there have been reports of various network setups blocking it due to some historical issues involving HTTP URLs for registries and SSL certis.
+
+Choose this option if youChoosing this option is consistent with how `aem-packager` worked previous to v4.0
+
+#### crxCompatibility
+
+Enables backwards compatibility for CRX when using Jackrabbit for `packager`. Set boolean `true` or `false`. Defaults to `false`. When enabled, it includes the JCR Vault `content-package-maven-plugin` so that built packages have the necessary goals needed for CRX deployment. Has no effect if `packager` is set to `jcrvault`.
+
 
 ### Defines
 
