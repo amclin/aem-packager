@@ -65,23 +65,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>com.day.jcr.vault</groupId>
-				<artifactId>content-package-maven-plugin</artifactId>
-				<version>0.0.24</version>
-				<extensions>true</extensions>
-				<configuration>
-					<name>${project.name}</name>
-					<group>${project.groupId}</group>
-					<failOnError>true</failOnError>
-					<filters>
-						<filter>
-							<mode>replace</mode>
-							<root>${project.jcrPath}</root>
-						</filter>
-					</filters>
-				</configuration>
-			</plugin>
+			<!-- plugin for package building inserts here -->
 		</plugins>
 	</build>
 

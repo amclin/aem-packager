@@ -1,0 +1,23 @@
+<plugin>
+    <groupId>org.apache.jackrabbit</groupId>
+    <artifactId>filevault-package-maven-plugin</artifactId>
+    <version>1.3.4</version>
+    <extensions>true</extensions>
+    <configuration>
+        <name>${project.name}</name>
+        <group>${project.groupId}</group>
+        <validatorsSettings>
+            <jackrabbit-filter>
+                <options>
+                    <severityForUndefinedFilterRootAncestors>warn</severityForUndefinedFilterRootAncestors>
+                </options>
+            </jackrabbit-filter>
+        </validatorsSettings>
+        <filters>
+            <filter>
+                <mode>replace</mode>
+                <root>${project.jcrPath}</root>
+            </filter>
+        </filters>
+    </configuration>
+</plugin>
